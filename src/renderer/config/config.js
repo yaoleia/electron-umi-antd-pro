@@ -11,11 +11,11 @@ export default {
         antd: true,
         dva: true,
         dynamicImport: true,
-        title: 'umi-electron-typescript',
+        title: 'umi-electron',
         dll: true,
-        routes: {
-          exclude: [],
-        },
+        // routes: {
+        //   exclude: [],
+        // },
         hardSource: false,
         routes: {
           exclude: [/components/],

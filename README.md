@@ -1,4 +1,4 @@
-# umi-electron-typescript
+# umi-electron-javecript
 
 ### 一个基于umijs + electron + javecript的模板
 

@@ -2,3 +2,6 @@ node_modules
 dist
 src/renderer/pages/.umi
 release
+yarn-error.log
+yarn.lock
+.history

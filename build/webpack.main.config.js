@@ -8,15 +8,6 @@ module.exports = merge.smart(baseConfig, {
   entry: {
     main: './src/main/main.js',
   },
-  // module: {
-  //   rules: [
-  //     {
-  //       test: /\.tsx?$/,
-  //       loader: 'awesome-typescript-loader',
-  //       exclude: /node_modules/,
-  //     },
-  //   ],
-  // },
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(
