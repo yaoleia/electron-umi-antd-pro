@@ -5,3 +5,6 @@ release
 yarn-error.log
 yarn.lock
 .history
+.vscode
+.history/
+.vscode/

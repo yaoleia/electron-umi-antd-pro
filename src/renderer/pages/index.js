@@ -9,7 +9,7 @@ export default class Index extends PureComponent {
 
     return (
       <div>
-        <p>sdsdsd</p>
+        <p>Umi</p>
       </div>
     );
   }
