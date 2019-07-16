@@ -22,10 +22,10 @@
   "scripts": {
     "start": "npm run build-main-dev && electron ./dist/main/main.js",
     "start:main": "electron-webpack dev",
-    "start:renderer": "APP_ROOT=src/renderer umi dev",
+    "start:renderer": "cross-env APP_ROOT=src/renderer umi dev",
     "build-main-prod": "NODE_ENV=production webpack --config ./build/webpack.main.prod.config.js",
     "build-main-dev": "NODE_ENV=development webpack --config ./build/webpack.main.config.js",
-    "build:renderer": "APP_ROOT=src/renderer umi build",
+    "build:renderer": "cross-env APP_ROOT=src/renderer umi build",
     "watch": "tsc -w",
     "lint": "tslint -c tslint.json -p tsconfig.json",
     "debug:main": "electron --inspect=5858 -w ./dist/main/main.js",
