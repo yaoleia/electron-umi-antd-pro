@@ -41,10 +41,6 @@
     "tutorial",
     "demo"
   ],
-  "author": {
-    "name": "xiaobei",
-    "email": "yebeixiaohai@gmail.com"
-  },
   "devDependencies": {
     "cross-env": "^5.1.1",
     "electron": "^5.0.1",
@@ -53,14 +49,41 @@
     "electron-webpack": "^2.6.2",
     "prettier": "1.17.0",
     "uglifyjs-webpack-plugin": "^2.1.2",
-    "umi": "^2.6.17",
-    "umi-plugin-react": "^1.7.6",
+    "umi": "^2.8.3",
+    "umi-plugin-dll": "^0.2.1",
+    "umi-plugin-dva": "^0.8.0",
+    "umi-plugin-react": "^1.4.0",
+    "umi-plugin-routes": "^0.1.5",
     "webpack": "4.31.0",
     "webpack-cli": "^3.3.2",
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
-    "http-proxy": "^1.17.0"
+    "antd": "^3.16.2",
+    "axios": "^0.19.0",
+    "braft-editor": "^2.2.9",
+    "braft-extensions": "0.0.18",
+    "braft-utils": "^3.0.12",
+    "classnames": "^2.2.6",
+    "dva": "^2.5.0-beta.2",
+    "dva-model-extend": "^0.1.2",
+    "echarts": "^4.2.1",
+    "echarts-for-react": "^2.0.15-beta.0",
+    "is-empty": "^1.2.0",
+    "js-md5": "^0.7.3",
+    "lodash.clonedeep": "^4.5.0",
+    "moment": "^2.24.0",
+    "moment-locales-webpack-plugin": "^1.0.7",
+    "node.extend": "^2.0.2",
+    "prop-types": "^15.7.2",
+    "query-string": "^6.5.0",
+    "rc-tree": "^1.15.2",
+    "react": "^16.7.0",
+    "react-color": "^2.17.3",
+    "react-dom": "^16.7.0",
+    "react-helmet": "^5.2.0",
+    "react-iframe-comm": "^1.2.2",
+    "run-electron": "^1.0.0"
   },
   "electronWebpack": {
     "main": {
