@@ -9,7 +9,7 @@ class Index extends Component {
   render() {
     return (
       <div>
-        <p>Umi{this.props.global.name}</p>
+        <p>{this.props.global.msg}</p>
       </div>
     );
   }

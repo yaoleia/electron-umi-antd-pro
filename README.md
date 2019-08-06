@@ -40,9 +40,7 @@
   $ npm run dist
 ```
 
-## 配置
-
-### 1. 打包配置说明 
+## 打包配置说明 
 
 [electron-builder-参数参考](https://www.electron.build/configuration/configuration) 
 
@@ -82,4 +80,36 @@
     "asar": false //  是否加密处理
   },
 }
+```
+
+## 项目结构
+
+```ssh
+.
+|-- build
+|   |-- icon.icns                         // 打包后程序图标
+|   |-- icon.ico                          // 打包后程序图标
+|   |-- webpack.base.config.js            // electron-webpack 基础配置
+|   |-- webpack.main.config.js            // electron-webpack 开发配置
+|   `-- webpack.main.prod.config.js       // electron-webpack 正式配置
+|-- dist                                  // 项目编译输出目录
+|   |-- main                              // 主程序编译目录
+|   `-- renderer                          // 页面编译目录
+|-- release                               // 打包输出目录
+|-- src                                   // 开发目录
+|   |-- main                              // 主程序目录
+|   |   `-- main.js                       // 主程序入口
+|   `-- renderer                          // React项目页面
+|       |-- assets
+|       |   `-- yay.jpg
+|       |-- config
+|       |   |-- config.js                 // umijs配置
+|       |   `-- webpack.config.js         // umijs-webpack配置
+|       |-- models
+|       |   `-- global.js
+|       |-- pages
+|           `-- index.js
+|       `-- global.js
+|-- package.json                          // 项目依赖以及打包配置
+`-- README.md                             // 项目说明文档
 ```
