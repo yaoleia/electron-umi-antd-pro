@@ -39,3 +39,47 @@
 ```javascript
   $ npm run dist
 ```
+
+## 配置
+
+### 1. 打包配置说明 
+
+[electron-builder-参数参考](https://www.electron.build/configuration/configuration) 
+
+[category-Mac分类参考](https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/LaunchServicesKeys.html#//apple_ref/doc/uid/TP40009250-SW8)
+
+```json
+{
+  ...
+  "build": {
+    "productName": "LittleStrong",// 程序名称
+    "files": [ // 需要打包的文件
+      "dist/",
+      "node_modules/",
+      "package.json"
+    ],
+    "mac": { // 打包mac版本
+      "category": "your.app.category.type", // mac app分类 
+      "target": [ // 打包类型
+        "dmg",
+        "zip"
+      ]
+    },
+    "win": { // 打包windows版本
+      "target": [ // 打包类型
+        "nsis"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true
+    },
+    "directories": { // 打包后输出目录
+      "output": "release"
+    },
+    "appId": "com.cn.littlestrong.demo", // appstore包名
+    "asar": false //  是否加密处理
+  },
+}
+```
