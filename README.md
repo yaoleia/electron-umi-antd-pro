@@ -40,13 +40,13 @@
   $ npm run dist
 ```
 
-## 打包配置说明 
+## 打包配置说明 [`package.json`](./package.json)
 
 [electron-builder-参数参考](https://www.electron.build/configuration/configuration) 
 
 [category-Mac分类参考](https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/LaunchServicesKeys.html#//apple_ref/doc/uid/TP40009250-SW8)
 
-```json
+```js
 {
   ...
   "build": {
