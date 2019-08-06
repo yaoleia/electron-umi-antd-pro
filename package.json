@@ -40,10 +40,9 @@
     "watch": "tsc -w",
     "lint": "tslint -c tslint.json -p tsconfig.json",
     "debug:main": "run-electron --inspect=5858 -w ./dist/main/main.js",
-    "pack:build": "npm run build:renderer && npm run build-main-prod && electron-builder --dir",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder --win",
-    "dist:win": "electron-builder --win",
+    "pack": "npm run build:renderer && npm run build-main-prod && electron-builder --dir",
+    "exe": "electron-builder --win",
+    "dist": "electron-builder",
     "prettier": "prettier --list-different \"./**/*.{ts,tsx,js,jsx,less}\""
   },
   "keywords": [
