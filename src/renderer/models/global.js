@@ -1,5 +1,5 @@
 export default {
   state: {
-    msg: 'Hello World',
+    name: 'global',
   },
 };

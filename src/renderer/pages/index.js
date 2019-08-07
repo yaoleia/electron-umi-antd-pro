@@ -1,18 +1,16 @@
 
-import React, { Component } from 'react';
-import { connect } from 'dva';
-class Index extends Component {
+import React, { PureComponent } from 'react';
+export default class Index extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {};
   }
   render() {
+
     return (
       <div>
-        <p>{this.props.global.msg}</p>
+        <p>Umi</p>
       </div>
     );
   }
 }
-
-export default connect(({ global }) => ({ global }))(Index)
