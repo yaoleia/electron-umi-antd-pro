@@ -11,7 +11,7 @@ export default {
         antd: true,
         dva: true,
         dynamicImport: true,
-        title: 'umi-electron',
+        title: 'Hello World',
         dll: true,
         // routes: {
         //   exclude: [],
