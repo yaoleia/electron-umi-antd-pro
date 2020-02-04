@@ -1,4 +1,4 @@
-const cwd = process.cwd();
+const buildrc = require("../../../.buildrc.js");
 
 export default {
   history: 'hash',
@@ -23,6 +23,9 @@ export default {
       },
     ],
   ],
+  alias: buildrc.webpack.alias,
+  treeShaking: true,
+  ignoreMomentLocale: true,
   routes: [
     {
       path: '/',

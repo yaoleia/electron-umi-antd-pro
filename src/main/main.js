@@ -2,12 +2,17 @@ import { app, BrowserWindow } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 
-let mainWindow =  null;
+let mainWindow = null;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    height: 600,
-    width: 800,
+    height: 800,
+    width: 1200,
+    webPreferences: {
+      nodeIntegration: true,
+      // nodeIntegrationInWorker: true,
+      preload: path.join(__dirname, './public/renderer.js')
+    }
   });
 
   if (process.env.NODE_ENV === 'development') {

@@ -32,6 +32,8 @@
 |       |   `-- global.js
 |       |-- pages
 |           `-- index.js
+|       |-- public
+|           `-- renderer.js               // 如果需要引用node的api，需要在这个js里面提前引入
 |       `-- global.js
 |-- package.json                          // 项目依赖以及打包配置
 `-- README.md                             // 项目说明文档
@@ -59,6 +61,10 @@
 ```javascript
   $ yarn start:main
 ```
+
+### 如何使用node的api
+
+需要在 src/renderer/public/renderer.js中引入相关的api才可以
 
 ### 打包
 
