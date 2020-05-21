@@ -70,12 +70,11 @@
     "react-helmet": "^5.2.1",
     "run-electron": "^1.0.0",
     "uglifyjs-webpack-plugin": "^2.2.0",
-    "umi": "^2.8.16",
-    "umi-plugin-dll": "^1.6.0",
-    "umi-plugin-react": "^1.15.2",
+    "umi": "^3.2.1",
     "webpack": "4.41.5",
     "webpack-cli": "^3.3.10",
-    "webpack-merge": "^4.2.2"
+    "webpack-merge": "^4.2.2",
+    "@umijs/preset-react": "^1.5.2"
   },
   "dependencies": {},
   "electronWebpack": {

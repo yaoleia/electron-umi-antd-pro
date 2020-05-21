@@ -1,30 +1,16 @@
 const buildrc = require("../../../.buildrc.js");
 
 export default {
-  history: 'hash',
+  history: { type: 'hash' },
   outputPath: `../../dist/renderer`,
   publicPath: './',
-  plugins: [
-    [
-      'umi-plugin-react',
-      {
-        antd: true,
-        dva: true,
-        dynamicImport: true,
-        title: 'Hello World',
-        dll: true,
-        // routes: {
-        //   exclude: [],
-        // },
-        hardSource: false,
-        routes: {
-          exclude: [/components/],
-        },
-      },
-    ],
-  ],
+  dva: {
+    immer: true,
+    hmr: false,
+  },
+  title: 'umi 3.0',
+
   alias: buildrc.webpack.alias,
-  treeShaking: true,
   ignoreMomentLocale: true,
   routes: [
     {

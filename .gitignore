@@ -7,3 +7,5 @@ yarn-error.log
 yarn.lock
 .history
 .vscode
+.umi
+src/renderer/.umi/
