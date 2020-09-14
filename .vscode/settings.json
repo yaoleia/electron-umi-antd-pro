@@ -8,9 +8,9 @@
     ".eslintignore": "ignore"
   },
 
-  "javascript.validate.enable": false,
-  "javascript.format.enable": false,
-  "typescript.format.enable": false,
+  // "javascript.validate.enable": false,
+  // "javascript.format.enable": false,
+  // "typescript.format.enable": false,
 
   "search.exclude": {
     ".git": true,
@@ -26,5 +26,6 @@
     "test/**/__snapshots__": true,
     "yarn.lock": true,
     "*.{css,sass,scss}.d.ts": true
-  }
+  },
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

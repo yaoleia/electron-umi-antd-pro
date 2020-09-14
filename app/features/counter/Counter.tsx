@@ -15,7 +15,7 @@ export default function Counter() {
   const dispatch = useDispatch();
   const value = useSelector(selectCount);
   return (
-    <div>
+    <div className="counter">
       <div className={styles.backButton} data-tid="backButton">
         <Link to={routes.HOME}>
           <i className="fa fa-arrow-left fa-3x" />
