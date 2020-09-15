@@ -5,10 +5,13 @@
 @import '~@fortawesome/fontawesome-free/css/all.css';
 @import '~antd/dist/antd.css';
 
+#root {
+  height: 100%;
+}
+
 body {
   position: relative;
   color: white;
-  height: 100vh;
   background-color: #232c39;
   background-image: linear-gradient(
     45deg,
@@ -45,4 +48,31 @@ a:hover {
   opacity: 1;
   text-decoration: none;
   cursor: pointer;
+}
+
+.ant-layout {
+  height: 100%;
+  &.main-layout {
+    .logo {
+      height: 32px;
+      background: rgba(255, 255, 255, 0.2);
+      margin: 16px;
+    }
+    .site-layout-background {
+      .trigger {
+        font-size: 18px;
+        line-height: 64px;
+        padding: 0 24px;
+        cursor: pointer;
+        transition: color 0.3s;
+        &:hover {
+          color: #1890ff;
+        }
+      }
+    }
+  }
+}
+
+.ant-layout-header {
+  background: #fff;
 }

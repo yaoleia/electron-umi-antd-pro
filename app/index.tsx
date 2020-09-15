@@ -2,7 +2,8 @@ import React, { Fragment } from 'react';
 import { render } from 'react-dom';
 import { AppContainer as ReactHotAppContainer } from 'react-hot-loader';
 import { history, configuredStore } from './store';
-import './app.global.css';
+import './style/lib/animate.css';
+import './style/app.global.scss';
 
 const store = configuredStore();
 
