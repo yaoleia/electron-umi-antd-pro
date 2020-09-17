@@ -4,6 +4,13 @@ import { AppContainer as ReactHotAppContainer } from 'react-hot-loader';
 import { history, configuredStore } from './store';
 import './style/lib/animate.css';
 import './style/app.global.scss';
+import { login } from './service';
+
+async function tologin() {
+  const resp = await login({ username: 'super', password: '123456' });
+  console.log(resp);
+}
+tologin();
 
 const store = configuredStore();
 

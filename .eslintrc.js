@@ -7,6 +7,9 @@ module.exports = {
     'react/jsx-wrap-multilines': 0,
     'block-no-empty': 0,
     '@typescript-eslint/triple-slash-reference': 0,
+    '@typescript-eslint/naming-convention': 0,
+    'promise/catch-or-return': 0,
+    'no-underscore-dangle': 0,
   },
   parserOptions: {
     ecmaVersion: 2020,
