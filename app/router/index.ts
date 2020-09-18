@@ -19,7 +19,7 @@ export const routes = [
     path: '/counter',
   },
   {
-    name: '404',
+    name: 'notFound',
   },
 ];
 

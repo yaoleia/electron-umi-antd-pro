@@ -4,7 +4,7 @@ import img from '../style/imgs/404.png';
 type AnimatedState = {
   animated: string;
 };
-class NotFound extends React.Component<any, AnimatedState> {
+class NotFound extends React.Component<JSX.Element, AnimatedState> {
   constructor(props: any) {
     super(props);
     this.state = {

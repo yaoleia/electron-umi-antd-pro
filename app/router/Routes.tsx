@@ -20,26 +20,33 @@ const CounterPage = (props: Record<string, any>) => (
   </React.Suspense>
 );
 
-const components = {
+interface Comps {
+  [key: string]: any;
+}
+
+const components: Comps = {
   home: HomePage,
-  404: NotFound,
+  notFound: NotFound,
   dataset: DatasetPage,
   model: ModelPage,
   counter: CounterPage,
 };
 
-export default function Routes() {
+export default function Routes(): JSX.Element {
   return (
     <App>
       <Switch>
-        {routes.map((route) => (
-          <Route
-            path={route.path}
-            exact
-            component={components[route.name]}
-            key={route.name}
-          />
-        ))}
+        {routes.map(
+          (route) =>
+            components[route.name] && (
+              <Route
+                path={route.path}
+                exact
+                component={components[route.name]}
+                key={route.name}
+              />
+            )
+        )}
       </Switch>
     </App>
   );
