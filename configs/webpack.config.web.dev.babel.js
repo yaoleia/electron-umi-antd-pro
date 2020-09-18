@@ -216,12 +216,6 @@ const devConfig = merge(baseConfig, {
     hot: true,
     headers: { 'Access-Control-Allow-Origin': '*' },
     contentBase: path.join(__dirname, '../web'),
-    proxy: {
-      '/base': {
-        target: 'http://10.18.96.121:5000/',
-        changeOrigin: true,
-      },
-    },
     watchOptions: {
       aggregateTimeout: 300,
       ignored: /node_modules/,

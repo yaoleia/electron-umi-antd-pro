@@ -70,6 +70,16 @@ declare module '*.module.less' {
   export default classes;
 }
 
+declare module '*.scss' {
+  const content: { [className: string]: string };
+  export default content;
+}
+
+declare module '*.css' {
+  const content: { [className: string]: string };
+  export default content;
+}
+
 declare module 'draftjs-to-html';
 
 declare module 'draftjs-to-markdown';

@@ -4,10 +4,11 @@ import { ConnectedRouter } from 'connected-react-router';
 import { hot } from 'react-hot-loader/root';
 import { History } from 'history';
 import { Layout } from 'antd';
-import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 import { Store } from '../store';
-import Routes from '../Routes';
+import Routes from '../router/Routes';
 import Menu from '../components/Menu';
+import logo from '../assets/256x256.png';
 
 const { Header, Sider, Content } = Layout;
 
@@ -21,35 +22,34 @@ const Root = ({ store, history }: Props) => {
 
   return (
     <Provider store={store}>
-      <Layout className="main-layout">
-        <Sider trigger={null} collapsible collapsed={collapsed}>
-          <div className="logo" />
-          <Menu />
-        </Sider>
-        <Layout className="site-layout">
-          <Header className="site-layout-background" style={{ padding: 0 }}>
-            {React.createElement(
-              collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
-              {
-                className: 'trigger',
-                onClick: () => setCollapsed(!collapsed),
-              }
-            )}
-          </Header>
-          <Content
-            className="site-layout-background"
-            style={{
-              margin: '24px 16px',
-              padding: 24,
-              minHeight: 280,
-            }}
+      <ConnectedRouter history={history}>
+        <Layout className="main-layout">
+          <Sider
+            onCollapse={(e) => setCollapsed(e)}
+            collapsible
+            collapsed={collapsed}
           >
-            <ConnectedRouter history={history}>
+            <Link to="/" className="logo">
+              <img alt="logo" src={logo} />
+              <span>ManuVision</span>
+            </Link>
+            <Menu />
+          </Sider>
+          <Layout className="site-layout">
+            <Header className="site-layout-background" style={{ padding: 0 }} />
+            <Content
+              className="site-layout-background"
+              style={{
+                margin: '24px 16px',
+                padding: 24,
+                minHeight: 280,
+              }}
+            >
               <Routes />
-            </ConnectedRouter>
-          </Content>
+            </Content>
+          </Layout>
         </Layout>
-      </Layout>
+      </ConnectedRouter>
     </Provider>
   );
 };
