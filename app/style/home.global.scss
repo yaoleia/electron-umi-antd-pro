@@ -1,0 +1,15 @@
+.home-container {
+  .ant-card {
+    width: 285px;
+    height: 320px;
+    .ant-card-head {
+      padding: 0;
+    }
+    .ant-card-head-title {
+      padding: 0;
+      > img {
+        width: 100%;
+      }
+    }
+  }
+}

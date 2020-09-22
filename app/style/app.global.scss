@@ -2,6 +2,7 @@
  * @NOTE: Prepend a `~` to css file paths that are in your node_modules
  *        See https://github.com/webpack-contrib/sass-loader#imports
  */
+@import './normalize.css';
 @import '~@fortawesome/fontawesome-free/css/all.css';
 @import '~antd/dist/antd.css';
 
@@ -28,10 +29,6 @@ h2 {
   font-weight: bold;
   letter-spacing: -0.025em;
   color: #fff;
-}
-
-p {
-  font-size: 24px;
 }
 
 li {
