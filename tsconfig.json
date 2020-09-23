@@ -27,7 +27,6 @@
     "release",
     "app/main.prod.js",
     "app/renderer.prod.js",
-    "app/dist",
-    "dll"
+    "app/dist"
   ]
 }

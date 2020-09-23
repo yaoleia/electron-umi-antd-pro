@@ -5,12 +5,12 @@
  * https://webpack.js.org/concepts/hot-module-replacement/
  */
 
+import express from 'express';
 import path from 'path';
-import fs from 'fs';
 import webpack from 'webpack';
-import chalk from 'chalk';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { merge } from 'webpack-merge';
-import { spawn, execSync } from 'child_process';
+import { spawn } from 'child_process';
 import baseConfig from './webpack.config.base';
 import CheckNodeEnv from '../internals/scripts/CheckNodeEnv';
 
@@ -21,24 +21,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const port = process.env.PORT || 1212;
-const publicPath = `http://localhost:${port}/dist`;
-const dll = path.join(__dirname, '..', 'dll');
-const manifest = path.resolve(dll, 'renderer.json');
-const requiredByDLLConfig = module.parent.filename.includes(
-  'webpack.config.renderer.dev.dll'
-);
-
-/**
- * Warn if the DLL is not built
- */
-if (!requiredByDLLConfig && !(fs.existsSync(dll) && fs.existsSync(manifest))) {
-  console.log(
-    chalk.black.bgYellow.bold(
-      'The DLL files are missing. Sit back while we build them for you with "yarn build-dll"'
-    )
-  );
-  execSync('yarn build-dll');
-}
+const publicPath = `http://localhost:${port}/`;
 
 export default merge(baseConfig, {
   devtool: 'inline-source-map',
@@ -57,7 +40,6 @@ export default merge(baseConfig, {
   ],
 
   output: {
-    publicPath: `http://localhost:${port}/dist/`,
     filename: 'renderer.dev.js',
   },
 
@@ -197,13 +179,16 @@ export default merge(baseConfig, {
     },
   },
   plugins: [
-    requiredByDLLConfig
-      ? null
-      : new webpack.DllReferencePlugin({
-          context: path.join(__dirname, '..', 'dll'),
-          manifest: require(manifest),
-          sourceType: 'var',
-        }),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: path.join(__dirname, '../web/index.template.html'),
+      minify: {
+        collapseWhitespace: true,
+        removeAttributeQuotes: true,
+        removeComments: true,
+      },
+      nodeModules: path.resolve(__dirname, '../node_modules'),
+    }),
 
     new webpack.HotModuleReplacementPlugin({
       multiStep: true,
@@ -229,6 +214,12 @@ export default merge(baseConfig, {
 
     new webpack.LoaderOptionsPlugin({
       debug: true,
+    }),
+
+    new webpack.DefinePlugin({
+      __static: `"${path
+        .join(__dirname, '../app/static')
+        .replace(/\\/g, '\\\\')}"`,
     }),
   ],
 
@@ -256,6 +247,9 @@ export default merge(baseConfig, {
     historyApiFallback: {
       verbose: true,
       disableDotRule: false,
+    },
+    after(app) {
+      app.use('/static', express.static(path.join(__dirname, '../app/static')));
     },
     before() {
       if (process.env.START_HOT) {

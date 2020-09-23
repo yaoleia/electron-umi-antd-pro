@@ -7,6 +7,8 @@ import webpack from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { merge } from 'webpack-merge';
 import TerserPlugin from 'terser-webpack-plugin';
 import baseConfig from './webpack.config.base';
@@ -31,7 +33,7 @@ export default merge(baseConfig, {
 
   output: {
     path: path.join(__dirname, '..', 'app/dist'),
-    publicPath: './dist/',
+    publicPath: './',
     filename: 'renderer.prod.js',
   },
 
@@ -207,6 +209,16 @@ export default merge(baseConfig, {
      * NODE_ENV should be production so that modules do not perform certain
      * development checks
      */
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: path.join(__dirname, '../web/index.template.html'),
+      minify: {
+        collapseWhitespace: true,
+        removeAttributeQuotes: true,
+        removeComments: true,
+      },
+      nodeModules: false,
+    }),
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'production',
       DEBUG_PROD: false,
@@ -221,6 +233,17 @@ export default merge(baseConfig, {
       analyzerMode:
         process.env.OPEN_ANALYZER === 'true' ? 'server' : 'disabled',
       openAnalyzer: process.env.OPEN_ANALYZER === 'true',
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.join(__dirname, '../app/static'),
+          to: path.join(__dirname, '../app/dist/static'),
+        },
+      ],
+    }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
     }),
   ],
 });

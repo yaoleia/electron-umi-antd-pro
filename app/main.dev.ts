@@ -16,6 +16,11 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
 
+const fileURL = path.join('file:', __dirname, 'dist', 'index.html');
+const winURL =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:1212'
+    : new URL(fileURL).href;
 export default class AppUpdater {
   constructor() {
     log.transports.file.level = 'info';
@@ -49,13 +54,13 @@ const installExtensions = async () => {
 };
 
 const createWindow = async () => {
-  if (
-    process.env.NODE_ENV === 'development' ||
-    process.env.DEBUG_PROD === 'true'
-  ) {
-    await installExtensions();
-  }
-
+  // if (
+  //   process.env.NODE_ENV === 'development' ||
+  //   process.env.DEBUG_PROD === 'true'
+  // ) {
+  //   await installExtensions();
+  // }
+  await installExtensions();
   mainWindow = new BrowserWindow({
     show: false,
     width: 1024,
@@ -72,7 +77,7 @@ const createWindow = async () => {
           },
   });
 
-  mainWindow.loadURL(`file://${__dirname}/app.html`);
+  mainWindow.loadURL(winURL);
 
   // @TODO: Use 'ready-to-show' event
   //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event

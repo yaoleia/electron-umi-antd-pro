@@ -19,7 +19,6 @@
     "app/main.prod.js": true,
     "app/main.prod.js.map": true,
     "bower_components": true,
-    "dll": true,
     "release": true,
     "node_modules": true,
     "npm-debug.log.*": true,

@@ -14,7 +14,7 @@ import DeleteSourceMaps from '../internals/scripts/DeleteSourceMaps';
 CheckNodeEnv('production');
 DeleteSourceMaps();
 
-export default merge(baseConfig, {
+const mainConfig = merge(baseConfig, {
   devtool: process.env.DEBUG_PROD === 'true' ? 'source-map' : 'none',
 
   mode: 'production',
@@ -74,3 +74,15 @@ export default merge(baseConfig, {
     __filename: false,
   },
 });
+
+if (process.env.NODE_ENV !== 'production') {
+  mainConfig.plugins.push(
+    new webpack.DefinePlugin({
+      __static: `"${path
+        .join(__dirname, '../app/static')
+        .replace(/\\/g, '\\\\')}"`,
+    })
+  );
+}
+
+export default mainConfig;

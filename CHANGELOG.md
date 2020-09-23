@@ -132,7 +132,6 @@ For full change list, see https://github.com/electron-react-boilerplate/electron
 
 - Changed node dev `__dirname` and `__filename` to node built in fn's (https://github.com/electron-react-boilerplate/electron-react-boilerplate/pull/1035)
 - Renamed `app/bundle.js` to `app/renderer.prod.js` for consistency
-- Renamed `dll/vendor.js` to `dll/renderer.dev.dll.js` for consistency
 
 #### Additions
 
@@ -204,7 +203,6 @@ Here's the most notable changes since `v0.10.0`. Its been about a year since a r
 - **Added optional support for SASS:** [#880](https://github.com/electron-react-boilerplate/electron-react-boilerplate/pull/880)
 - **Added support for eslint-plugin-flowtype:** [#911](https://github.com/electron-react-boilerplate/electron-react-boilerplate/pull/911)
 - **Added support for appveyor:** [#280](https://github.com/electron-react-boilerplate/electron-react-boilerplate/pull/280)
-- **Added support for webpack dlls:** [#860](https://github.com/electron-react-boilerplate/electron-react-boilerplate/pull/860)
 - **Route based code splitting:** [#884](https://github.com/electron-react-boilerplate/electron-react-boilerplate/pull/884)
 - **Added support for Webpack Bundle Analyzer:** [#922](https://github.com/electron-react-boilerplate/electron-react-boilerplate/pull/922)
 

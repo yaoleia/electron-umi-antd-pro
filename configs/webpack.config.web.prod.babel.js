@@ -8,6 +8,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 import { merge } from 'webpack-merge';
 import TerserPlugin from 'terser-webpack-plugin';
 import baseConfig from './webpack.config.base';
@@ -216,6 +217,18 @@ const productionConfig = merge(baseConfig, {
       hash: true,
       template: './web/index.template.html',
       filename: 'index.html', // relative to root of the application
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.join(__dirname, '../app/static'),
+          to: path.join(__dirname, '../web/dist/static'),
+        },
+      ],
+    }),
+
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
     }),
   ],
 });

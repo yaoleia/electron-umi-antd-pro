@@ -7,8 +7,10 @@
  * https://webpack.js.org/concepts/hot-module-replacement/
  */
 
+import express from 'express';
 import path from 'path';
 import webpack from 'webpack';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { merge } from 'webpack-merge';
 import baseConfig from './webpack.config.base';
 import CheckNodeEnv from '../internals/scripts/CheckNodeEnv';
@@ -35,7 +37,6 @@ const devConfig = merge(baseConfig, {
   ],
 
   output: {
-    path: path.join(__dirname, '..', 'web/dist'),
     publicPath: `./`,
     filename: 'web.dev.js',
     libraryTarget: 'var',
@@ -173,6 +174,17 @@ const devConfig = merge(baseConfig, {
   },
 
   plugins: [
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: path.join(__dirname, '../web/index.template.html'),
+      minify: {
+        collapseWhitespace: true,
+        removeAttributeQuotes: true,
+        removeComments: true,
+      },
+      nodeModules: path.resolve(__dirname, '../node_modules'),
+    }),
+
     new webpack.HotModuleReplacementPlugin({
       multiStep: true,
     }),
@@ -207,6 +219,7 @@ const devConfig = merge(baseConfig, {
 
   devServer: {
     port,
+    host: '0.0.0.0',
     publicPath,
     compress: true,
     noInfo: false,
@@ -215,7 +228,6 @@ const devConfig = merge(baseConfig, {
     lazy: false,
     hot: true,
     headers: { 'Access-Control-Allow-Origin': '*' },
-    contentBase: path.join(__dirname, '../web'),
     watchOptions: {
       aggregateTimeout: 300,
       ignored: /node_modules/,
@@ -224,6 +236,9 @@ const devConfig = merge(baseConfig, {
     historyApiFallback: {
       verbose: true,
       disableDotRule: false,
+    },
+    after(app) {
+      app.use('/static', express.static(path.join(__dirname, '../app/static')));
     },
     before() {
       if (process.env.START_HOT) {

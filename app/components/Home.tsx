@@ -7,10 +7,7 @@ import '../style/home.global.scss';
 function ProjectItem(props: any) {
   const { project } = props;
   return (
-    <Card
-      title={<img src="file:///Users/admin/Desktop/111.jpg" alt="" />}
-      bordered={false}
-    >
+    <Card title={<img src="static/favicon.ico" alt="" />} bordered={false}>
       <p>{project.type}</p>
       <p>{project.title}</p>
       <p>{project.description}</p>

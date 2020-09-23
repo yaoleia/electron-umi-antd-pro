@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>ManuVision</title>
+    <title>ManuVision-test</title>
     <script>
       (() => {
         if (
@@ -24,11 +24,6 @@
       if (typeof process === 'object') {
         const scripts = [];
 
-        if (process.env.NODE_ENV === 'development') {
-          // Dynamically insert the DLL script in development env in the
-          // renderer process
-          scripts.push('../dll/renderer.dev.dll.js');
-        }
         if (process.env.START_HOT) {
           // Dynamically insert the bundled app script in the renderer process
           const port = process.env.PORT || 1212;
