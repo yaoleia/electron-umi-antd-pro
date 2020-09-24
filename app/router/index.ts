@@ -1,15 +1,18 @@
 export const routes = [
   {
+    title: '首页',
     name: 'home',
     path: '/',
     icon: 'HomeOutlined',
   },
   {
+    title: '数据集',
     name: 'dataset',
     path: '/dataset',
     icon: 'DatabaseOutlined',
   },
   {
+    title: '模型',
     name: 'model',
     path: '/model',
     icon: 'RadarChartOutlined',

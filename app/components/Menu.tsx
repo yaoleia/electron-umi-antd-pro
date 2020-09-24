@@ -10,18 +10,23 @@ const iconBC = (name: string) =>
   React.createElement(Icon && (Icon as any)[name]);
 
 const SiderMenu = withRouter(({ history }) => {
+  const { pathname } = history.location;
+
+  const selectedKeys = routes
+    .filter((route) => {
+      if (!route.path) return false;
+      if (route.path === '/') return pathname === '/';
+      return pathname.startsWith(route.path);
+    })
+    .map((route) => route.path);
+
   return (
-    <Menu
-      theme="dark"
-      mode="inline"
-      defaultSelectedKeys={['home']}
-      selectedKeys={[history.location.pathname]}
-    >
+    <Menu theme="dark" mode="inline" selectedKeys={selectedKeys as any}>
       {routes.map(
         (route) =>
           route.icon && (
             <Item key={route.path} icon={iconBC(route.icon)}>
-              <Link to={route.path}>{route.name}</Link>
+              <Link to={route.path}>{route.title}</Link>
             </Item>
           )
       )}
