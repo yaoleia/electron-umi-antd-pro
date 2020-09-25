@@ -12,6 +12,12 @@ export default {
 
   alias: buildrc.webpack.alias,
   ignoreMomentLocale: true,
+  layout: {},
+  locale: {
+    default: 'zh-CN',
+    antd: true,
+    baseNavigator: true,
+  },
   routes: [
     {
       path: '/',

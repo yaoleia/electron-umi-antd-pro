@@ -54,6 +54,11 @@
     "demo"
   ],
   "devDependencies": {
+    "@ant-design/pro-cli": "^1.0.23",
+    "@ant-design/pro-layout": "^6.4.19",
+    "@umijs/preset-ant-design-pro": "^1.2.2",
+    "@umijs/preset-react": "^1.5.2",
+    "@umijs/preset-ui": "^2.2.7",
     "axios": "^0.19.2",
     "classnames": "^2.2.6",
     "cross-env": "^5.1.1",
@@ -70,13 +75,15 @@
     "react-helmet": "^5.2.1",
     "run-electron": "^1.0.0",
     "uglifyjs-webpack-plugin": "^2.2.0",
-    "umi": "^3.2.1",
+    "umi": "^3.2.22",
     "webpack": "4.41.5",
     "webpack-cli": "^3.3.10",
-    "webpack-merge": "^4.2.2",
-    "@umijs/preset-react": "^1.5.2"
+    "webpack-merge": "^4.2.2"
   },
-  "dependencies": {},
+  "dependencies": {
+    "antd": "^4.6.5",
+    "dva": "^2.4.1"
+  },
   "electronWebpack": {
     "main": {
       "sourceDirectory": "src/main"
