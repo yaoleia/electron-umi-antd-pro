@@ -1,5 +1,8 @@
 # electron-umi-antd-pro
 
+<img src="internals/img/electron.png" width="100%" />
+<img src="internals/img/web.png" width="100%" />
+
 ### 基于 umijs + electron + ant-design-pro 的模板
 
 ## 支持
