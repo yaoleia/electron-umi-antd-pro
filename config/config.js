@@ -103,4 +103,5 @@ export default defineConfig({
   manifest: {
     basePath: '/',
   },
+  headScripts: [{ src: './renderer.js' }],
 });
