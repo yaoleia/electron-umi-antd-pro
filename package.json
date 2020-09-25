@@ -1,11 +1,42 @@
 {
-  "name": "ant-design-pro",
-  "version": "4.2.1",
+  "name": "electron-umi-antd-pro",
+  "version": "0.0.1",
   "private": true,
   "description": "An out-of-box UI solution for enterprise applications",
+  "main": "./dist/main/main.js",
+  "build": {
+    "artifactName": "${productName}-${version}.${ext}",
+    "productName": "ManuVision",
+    "files": [
+      "dist/",
+      "node_modules/",
+      "package.json"
+    ],
+    "mac": {
+      "category": "your.app.category.type"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true
+    },
+    "directories": {
+      "output": "release/${version}"
+    },
+    "appId": "yaoleia@163.com",
+    "compression": "maximum",
+    "asar": true
+  },
   "scripts": {
     "analyze": "cross-env ANALYZE=1 umi build",
-    "build": "umi build",
+    "build": "yarn build:renderer && yarn build:main && electron-builder -mwl",
+    "build:main": "NODE_ENV=production webpack --config ./build/webpack.main.prod.config.js",
+    "build:renderer": "umi build",
     "deploy": "npm run site && npm run gh-pages",
     "dev": "npm run start:dev",
     "fetch:blocks": "pro fetch-blocks && npm run prettier",
@@ -21,6 +52,7 @@
     "precommit": "lint-staged",
     "prettier": "prettier -c --write \"src/**/*\"",
     "start": "umi dev",
+    "start:main": "electron-webpack dev",
     "start:dev": "cross-env REACT_APP_ENV=dev MOCK=none umi dev",
     "start:no-mock": "cross-env MOCK=none umi dev",
     "start:no-ui": "cross-env UMI_UI=none umi dev",
@@ -35,9 +67,15 @@
   "lint-staged": {
     "**/*.less": "stylelint --syntax less",
     "**/*.{js,jsx,ts,tsx}": "npm run lint-staged:js",
-    "**/*.{js,jsx,tsx,ts,less,md,json}": ["prettier --write"]
+    "**/*.{js,jsx,tsx,ts,less,md,json}": [
+      "prettier --write"
+    ]
   },
-  "browserslist": ["> 1%", "last 2 versions", "not ie <= 10"],
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 10"
+  ],
   "dependencies": {
     "@ant-design/icons": "^4.0.0",
     "@ant-design/pro-descriptions": "^1.0.16",
@@ -46,6 +84,7 @@
     "@umijs/route-utils": "^1.0.32",
     "antd": "^4.6.3",
     "classnames": "^2.2.6",
+    "electron": "^10.1.2",
     "lodash": "^4.17.11",
     "moment": "^2.25.3",
     "omit.js": "^2.0.2",
@@ -55,7 +94,9 @@
     "react-helmet-async": "^1.0.4",
     "umi": "^3.2.14",
     "umi-request": "^1.0.8",
-    "use-merge-value": "^1.0.1"
+    "use-merge-value": "^1.0.1",
+    "webpack": "^4.44.2",
+    "webpack-merge": "^5.1.4"
   },
   "devDependencies": {
     "@ant-design/pro-cli": "^1.0.18",
@@ -79,6 +120,9 @@
     "cross-env": "^7.0.0",
     "cross-port-killer": "^1.1.1",
     "detect-installer": "^1.0.1",
+    "electron-builder": "^22.8.1",
+    "electron-debug": "^3.1.0",
+    "electron-webpack": "^2.8.2",
     "enzyme": "^3.11.0",
     "eslint": "^7.1.0",
     "express": "^4.17.1",
@@ -89,15 +133,27 @@
     "prettier": "^2.0.1",
     "pro-download": "1.0.1",
     "puppeteer-core": "^5.0.0",
+    "run-electron": "^1.0.0",
     "stylelint": "^13.0.0",
-    "typescript": "^3.9.7"
+    "typescript": "^3.9.7",
+    "uglifyjs-webpack-plugin": "^2.2.0"
   },
-  "engines": { "node": ">=10.0.0" },
+  "engines": {
+    "node": ">=10.0.0"
+  },
   "checkFiles": [
     "src/**/*.js*",
     "src/**/*.ts*",
     "src/**/*.less",
     "config/**/*.js*",
     "scripts/**/*.js"
-  ]
+  ],
+  "electronWebpack": {
+    "main": {
+      "sourceDirectory": "main"
+    },
+    "renderer": {
+      "sourceDirectory": null
+    }
+  }
 }

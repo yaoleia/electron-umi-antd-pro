@@ -1,14 +1,16 @@
-// https://umijs.org/config/
 import { defineConfig } from 'umi';
 import defaultSettings from './defaultSettings';
 import proxy from './proxy';
 const { REACT_APP_ENV } = process.env;
 export default defineConfig({
+  history: { type: 'hash' },
   hash: true,
   antd: {},
   dva: {
     hmr: true,
   },
+  outputPath: './dist/renderer',
+  publicPath: './',
   locale: {
     // default zh-CN
     default: 'zh-CN',
@@ -95,7 +97,6 @@ export default defineConfig({
     // ...darkTheme,
     'primary-color': defaultSettings.primaryColor,
   },
-  // @ts-ignore
   title: false,
   ignoreMomentLocale: true,
   proxy: proxy[REACT_APP_ENV || 'dev'],
