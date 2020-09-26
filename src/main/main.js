@@ -11,7 +11,7 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: true,
       // nodeIntegrationInWorker: true,
-      preload: path.join(__dirname, './public/renderer.js')
+      // preload: path.join(__dirname, './public/renderer.js')
     }
   });
 
