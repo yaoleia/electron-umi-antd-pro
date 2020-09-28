@@ -75,6 +75,12 @@
   $ yarn start:main
 ```
 
+或者同时启动主进程和渲染进程
+
+```javascript
+  $ yarn start
+```
+
 ### 如何使用 node 的 api
 
 需要在 /public/renderer.js 中引入相关的 api，例如 electron 依赖
