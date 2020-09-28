@@ -3,7 +3,9 @@ import defaultSettings from './defaultSettings';
 import proxy from './proxy';
 const { REACT_APP_ENV } = process.env;
 export default defineConfig({
-  history: { type: 'hash' },
+  history: {
+    type: 'hash',
+  },
   hash: true,
   antd: {
     dark: true,
@@ -44,12 +46,24 @@ export default defineConfig({
           routes: [
             {
               path: '/',
-              redirect: '/welcome',
+              redirect: '/listprojects',
             },
             {
-              path: '/welcome',
-              name: 'welcome',
+              name: '项目',
               icon: 'smile',
+              path: '/listprojects',
+              component: './ListProjects',
+            },
+            {
+              name: '数据集',
+              icon: 'table',
+              path: '/list',
+              component: './ListTableList',
+            },
+            {
+              name: '模型',
+              icon: 'smile',
+              path: '/welcome',
               component: './Welcome',
             },
             {
@@ -63,16 +77,10 @@ export default defineConfig({
                   path: '/admin/sub-page',
                   name: 'sub-page',
                   icon: 'smile',
-                  component: './Welcome',
+                  component: './ListProjects',
                   authority: ['admin'],
                 },
               ],
-            },
-            {
-              name: 'list.table-list',
-              icon: 'table',
-              path: '/list',
-              component: './ListTableList',
             },
             {
               component: './404',
@@ -99,5 +107,9 @@ export default defineConfig({
   manifest: {
     basePath: '/',
   },
-  headScripts: [{ src: './renderer.js' }],
+  headScripts: [
+    {
+      src: './renderer.js',
+    },
+  ],
 });
