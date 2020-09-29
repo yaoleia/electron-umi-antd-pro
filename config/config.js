@@ -8,8 +8,7 @@ export default defineConfig({
   },
   hash: true,
   antd: {
-    dark: true,
-    // compact: true,
+    dark: true, // compact: true,
   },
   dva: {
     hmr: true,
@@ -50,21 +49,21 @@ export default defineConfig({
             },
             {
               name: '项目',
-              icon: 'smile',
+              icon: 'ProjectOutlined',
               path: '/listprojects',
               component: './ListProjects',
             },
             {
               name: '数据集',
-              icon: 'table',
+              icon: 'DatabaseOutlined',
               path: '/list',
               component: './ListTableList',
             },
             {
               name: '模型',
-              icon: 'smile',
-              path: '/welcome',
-              component: './Welcome',
+              icon: 'RadarChartOutlined',
+              path: '/modellist',
+              component: './ModelList',
             },
             {
               path: '/admin',
