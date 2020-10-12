@@ -1,4 +1,4 @@
-import { DefaultFooter, getMenuData, getPageTitle } from '@ant-design/pro-layout';
+import { getMenuData, getPageTitle } from '@ant-design/pro-layout';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { Link, connect } from 'umi';
 import React from 'react';
@@ -43,7 +43,6 @@ const UserLayout = (props) => {
           </div>
           {children}
         </div>
-        <DefaultFooter />
       </div>
     </HelmetProvider>
   );

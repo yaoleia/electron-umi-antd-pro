@@ -13,10 +13,10 @@ const { Paragraph } = Typography;
 
 const getKey = (id, index) => `${id}-${index}`;
 
-const ListProjects = ({ dispatch, listProjects: { list = [] }, loading }) => {
+const ProjectList = ({ dispatch, projectList: { list = [] }, loading }) => {
   useEffect(() => {
     dispatch({
-      type: 'listProjects/fetch',
+      type: 'projectList/fetch',
       payload: {
         count: 8,
       },
@@ -90,7 +90,7 @@ const ListProjects = ({ dispatch, listProjects: { list = [] }, loading }) => {
             // 表单项变化时请求数据
             // 模拟查询表单生效
             dispatch({
-              type: 'listProjects/fetch',
+              type: 'projectList/fetch',
               payload: {
                 count: 8,
               },
@@ -159,7 +159,7 @@ const ListProjects = ({ dispatch, listProjects: { list = [] }, loading }) => {
   );
 };
 
-export default connect(({ listProjects, loading }) => ({
-  listProjects,
-  loading: loading.models.listProjects,
-}))(ListProjects);
+export default connect(({ projectList, loading }) => ({
+  projectList,
+  loading: loading.models.projectList,
+}))(ProjectList);

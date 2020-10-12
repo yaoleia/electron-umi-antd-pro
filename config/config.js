@@ -45,19 +45,19 @@ export default defineConfig({
           routes: [
             {
               path: '/',
-              redirect: '/listprojects',
+              redirect: '/projectlist',
             },
             {
               name: '项目',
               icon: 'ProjectOutlined',
-              path: '/listprojects',
-              component: './ListProjects',
+              path: '/projectlist',
+              component: './ProjectList',
             },
             {
               name: '数据集',
               icon: 'DatabaseOutlined',
               path: '/list',
-              component: './ListTableList',
+              component: './DatasetList',
             },
             {
               name: '模型',
@@ -76,7 +76,7 @@ export default defineConfig({
                   path: '/admin/sub-page',
                   name: 'sub-page',
                   icon: 'smile',
-                  component: './ListProjects',
+                  component: './ProjectList',
                   authority: ['admin'],
                 },
               ],
