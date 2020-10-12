@@ -13,7 +13,7 @@ const { Paragraph } = Typography;
 
 const getKey = (id, index) => `${id}-${index}`;
 
-const ProjectList = ({ dispatch, projectList: { list = [] }, loading }) => {
+const ProjectList = ({ dispatch, projectList: { list = [] }, loading, history }) => {
   useEffect(() => {
     dispatch({
       type: 'projectList/fetch',
@@ -37,7 +37,14 @@ const ProjectList = ({ dispatch, projectList: { list = [] }, loading }) => {
       }}
       dataSource={list}
       renderItem={(item) => (
-        <List.Item>
+        <List.Item
+          onClick={() => {
+            history.push({
+              pathname: '/projectlist/projectstep',
+              state: { item },
+            });
+          }}
+        >
           <Card className={styles.card} hoverable cover={<img alt={item.title} src={item.cover} />}>
             <Card.Meta
               title={<a>{item.title}</a>}

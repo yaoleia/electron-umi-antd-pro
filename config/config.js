@@ -48,6 +48,15 @@ export default defineConfig({
               redirect: '/projectlist',
             },
             {
+              name: '详情',
+              icon: 'ProjectOutlined',
+              path: '/projectlist/projectstep',
+              component: './ProjectStep',
+              headerRender: false,
+              layout: 'top',
+              hideInMenu: true,
+            },
+            {
               name: '项目',
               icon: 'ProjectOutlined',
               path: '/projectlist',
@@ -56,7 +65,7 @@ export default defineConfig({
             {
               name: '数据集',
               icon: 'DatabaseOutlined',
-              path: '/list',
+              path: '/datasetlist',
               component: './DatasetList',
             },
             {
