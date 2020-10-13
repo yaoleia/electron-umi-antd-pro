@@ -41,7 +41,9 @@ const ProjectList = ({ dispatch, projectList: { list = [] }, loading, history })
           onClick={() => {
             history.push({
               pathname: '/projectlist/projectstep',
-              state: { item },
+              query: {
+                pid: item.title,
+              },
             });
           }}
         >

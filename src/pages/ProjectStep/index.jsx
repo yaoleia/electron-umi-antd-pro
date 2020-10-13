@@ -3,13 +3,23 @@ import { Spin } from 'antd';
 import { Link } from 'umi';
 import styles from './index.less';
 
-export default ({ location }) => {
+export default ({ location, history }) => {
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    setTimeout(() => {
+    if (location.query?.pid) return;
+    history.push('/projectlist');
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
       setLoading(false);
     }, 3000);
+    return () => {
+      clearTimeout(timer);
+    };
   }, []);
+
   return (
     <div
       className={styles.main}
@@ -20,7 +30,7 @@ export default ({ location }) => {
     >
       <Link to="/projectlist">projectlist</Link>
       <Spin spinning={loading} size="large" />
-      <p>{location.state?.item?.title}</p>
+      <p>{location.query?.pid}</p>
     </div>
   );
 };
