@@ -1,17 +1,20 @@
-import { Card, List, Typography, Button, Modal, message } from 'antd';
+import { Card, List, Typography, Button, Modal, message, Form } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'umi';
 import moment from 'moment';
 import ProForm, { ProFormText, ProFormRadio, ProFormTextArea } from '@ant-design/pro-form';
 import AvatarList from './components/AvatarList';
+import TagSelect from './components/TagSelect';
 import styles from './style.less';
 
+const FormItem = Form.Item;
 const { Paragraph } = Typography;
 
 const getKey = (id, index) => `${id}-${index}`;
 
 const ProjectList = ({ dispatch, projectList: { list = [] }, loading }) => {
   const [modalVisible, handleModalVisible] = useState(false);
+  const [tags, handleTagsChange] = useState([]);
   const getProjectList = () => {
     dispatch({
       type: 'projectList/fetch',
@@ -34,7 +37,9 @@ const ProjectList = ({ dispatch, projectList: { list = [] }, loading }) => {
     ocr: '字符识别',
     keypoint: '关键点检测',
   };
-  const cardList = list && (
+
+  const listFiltered = tags.length ? list.filter((item) => tags.includes(item.projectType)) : list;
+  const cardList = (
     <List
       rowKey="id"
       loading={loading}
@@ -47,7 +52,7 @@ const ProjectList = ({ dispatch, projectList: { list = [] }, loading }) => {
         xl: 4,
         xxl: 4,
       }}
-      dataSource={list}
+      dataSource={listFiltered}
       renderItem={(item) => (
         <List.Item
           onClick={() => {
@@ -99,10 +104,34 @@ const ProjectList = ({ dispatch, projectList: { list = [] }, loading }) => {
   );
   return (
     <div className={styles.coverCardList}>
-      <Card bordered={false}>
-        <Button type="primary" onClick={() => handleModalVisible(true)}>
-          新建项目
-        </Button>
+      <Card className={styles.cardTop} bordered={false}>
+        <Form
+          layout="inline"
+          onValuesChange={(values) => {
+            // 表单项变化时请求数据
+            // 模拟查询表单生效
+            handleTagsChange(values.typeSelect);
+            dispatch({
+              type: 'listProjects/fetch',
+              payload: {
+                count: 8,
+              },
+            });
+          }}
+        >
+          <Button type="primary" onClick={() => handleModalVisible(true)}>
+            新建项目
+          </Button>
+          <FormItem name="typeSelect">
+            <TagSelect>
+              {Object.keys(types).map((type) => (
+                <TagSelect.Option value={type} key={type}>
+                  {types[type]}
+                </TagSelect.Option>
+              ))}
+            </TagSelect>
+          </FormItem>
+        </Form>
       </Card>
       <div className={styles.cardList}>{cardList}</div>
       <Modal
