@@ -56,7 +56,7 @@ const ProjectList = ({ dispatch, projectList: { list = [] }, loading }) => {
       renderItem={(item) => (
         <List.Item
           onClick={() => {
-            window.open(`/#/projectlist/projectstep?pid=${item.title}`, '_blank');
+            window.open(`/#/projectlist/projectstep?pid=${item.id}`, '_blank');
             // history.push({
             //   pathname: '/projectlist/projectstep',
             //   query: {

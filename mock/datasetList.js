@@ -17,7 +17,7 @@ const genList = (current, pageSize) => {
       ][i % 2],
       name: `TradeCode ${index}`,
       owner: '曲丽丽',
-      desc: '这是一段描述',
+      desc: `这是一段描述 ${i + 1}`,
       callNo: Math.floor(Math.random() * 1000),
       status: Math.floor(Math.random() * 10) % 4,
       updatedAt: new Date(),
@@ -90,6 +90,10 @@ function getRule(req, res, u) {
 
   if (params.name) {
     dataSource = dataSource.filter((data) => data.name.includes(params.name || ''));
+  }
+
+  if (params.desc) {
+    dataSource = dataSource.filter((data) => data.desc.includes(params.desc || ''));
   }
 
   const result = {

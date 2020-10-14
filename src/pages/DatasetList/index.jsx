@@ -81,14 +81,13 @@ const TableList = () => {
   const [selectedRowsState, setSelectedRows] = useState([]);
   const columns = [
     {
-      title: '规则名称',
+      title: '数据集名称',
       dataIndex: 'name',
-      tip: '规则名称是唯一的 key',
       formItemProps: {
         rules: [
           {
             required: true,
-            message: '规则名称为必填项',
+            message: '数据集名称为必填项',
           },
         ],
       },
@@ -102,16 +101,18 @@ const TableList = () => {
       valueType: 'textarea',
     },
     {
-      title: '服务调用次数',
+      title: '图片张数',
       dataIndex: 'callNo',
       sorter: true,
       hideInForm: true,
-      renderText: (val) => `${val} 万`,
+      search: false,
+      renderText: (val) => `${val} 张`,
     },
     {
       title: '状态',
       dataIndex: 'status',
       hideInForm: true,
+      search: false,
       valueEnum: {
         0: {
           text: '关闭',
@@ -132,11 +133,12 @@ const TableList = () => {
       },
     },
     {
-      title: '上次调度时间',
+      title: '上次更新时间',
       dataIndex: 'updatedAt',
       sorter: true,
       valueType: 'dateTime',
       hideInForm: true,
+      search: false,
       renderFormItem: (item, { defaultRender, ...rest }, form) => {
         const status = form.getFieldValue('status');
 
@@ -166,7 +168,9 @@ const TableList = () => {
             配置
           </a>
           <Divider type="vertical" />
-          <a href="">订阅警报</a>
+          <a>删除</a>
+          <Divider type="vertical" />
+          <a>标注</a>
         </>
       ),
     },
@@ -204,9 +208,7 @@ const TableList = () => {
                 {selectedRowsState.length}
               </a>{' '}
               项&nbsp;&nbsp;
-              <span>
-                服务调用次数总计 {selectedRowsState.reduce((pre, item) => pre + item.callNo, 0)} 万
-              </span>
+              <span>总计 {selectedRowsState.reduce((pre, item) => pre + item.callNo, 0)} 张</span>
             </div>
           }
         >
