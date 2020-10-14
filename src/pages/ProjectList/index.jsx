@@ -1,8 +1,8 @@
-import { Card, List, Typography, Button, Modal } from 'antd';
+import { Card, List, Typography, Button, Modal, message } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'umi';
 import moment from 'moment';
-import ProTable from '@ant-design/pro-table';
+import ProForm, { ProFormText, ProFormRadio, ProFormTextArea } from '@ant-design/pro-form';
 import AvatarList from './components/AvatarList';
 import styles from './style.less';
 
@@ -27,6 +27,13 @@ const ProjectList = ({ dispatch, projectList: { list = [] }, loading }) => {
     };
   });
   useEffect(getProjectList, []);
+  const types = {
+    defect: '缺陷检测',
+    position: '目标检测',
+    classification: '分类',
+    ocr: '字符识别',
+    keypoint: '关键点检测',
+  };
   const cardList = list && (
     <List
       rowKey="id"
@@ -55,7 +62,11 @@ const ProjectList = ({ dispatch, projectList: { list = [] }, loading }) => {
         >
           <Card className={styles.card} hoverable cover={<img alt={item.title} src={item.cover} />}>
             <Card.Meta
-              title={<a>{item.title}</a>}
+              title={
+                <>
+                  <a>{item.title}</a> - <i>{types[item.projectType] || item.projectType}</i>
+                </>
+              }
               description={
                 <Paragraph
                   className={styles.item}
@@ -101,40 +112,38 @@ const ProjectList = ({ dispatch, projectList: { list = [] }, loading }) => {
         onCancel={() => handleModalVisible(false)}
         footer={null}
       >
-        <ProTable
-          rowKey="key"
-          type="form"
-          columns={[
-            {
-              title: '项目名称',
-              dataIndex: 'name',
-              formItemProps: {
-                rules: [
-                  {
-                    required: true,
-                    message: '项目名称为必填项',
-                  },
-                ],
-              },
-            },
-            {
-              title: '项目类型',
-              dataIndex: 'type',
-              formItemProps: {
-                rules: [
-                  {
-                    required: true,
-                    message: '项目名称为必填项',
-                  },
-                ],
-              },
-            },
-            {
-              title: '项目描述',
-              dataIndex: 'description',
-            },
-          ]}
-        />
+        <ProForm
+          onFinish={async (values) => {
+            console.log(values);
+            message.success('提交成功！');
+            handleModalVisible(false);
+          }}
+        >
+          <ProFormText
+            width="100%"
+            name="title"
+            label="项目名称"
+            placeholder="请输入"
+            rules={[{ required: true, message: '请填写项目名称！' }]}
+          />
+          <ProFormRadio.Group
+            name="projectType"
+            label="项目类型"
+            rules={[{ required: true, message: '请选择项目类型！' }]}
+          >
+            {Object.keys(types).map((type) => (
+              <ProFormRadio.Button value={type} key={type}>
+                {types[type]}
+              </ProFormRadio.Button>
+            ))}
+          </ProFormRadio.Group>
+          <ProFormTextArea
+            width="100%"
+            name="subDescription"
+            label="备注"
+            placeholder="请输入备注"
+          />
+        </ProForm>
       </Modal>
     </div>
   );

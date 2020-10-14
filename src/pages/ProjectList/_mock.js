@@ -1,13 +1,4 @@
-const titles = [
-  'Alipay',
-  'Angular',
-  'Ant Design',
-  'Ant Design Pro',
-  'Bootstrap',
-  'React',
-  'Vue',
-  'Webpack',
-];
+const titles = ['纤维成分', '人脸识别', '汽车仪表盘', '扫码枪', '成衣尺寸'];
 const avatars = [
   'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png', // Alipay
   'https://gw.alipayobjects.com/zos/rmsportal/zOsKZmFRdUtvpqCImOVY.png', // Angular
@@ -44,14 +35,17 @@ const user = [
   '仲尼',
 ];
 
+const projectTypes = ['defect', 'position', 'classification', 'ocr', 'keypoint'];
+
 function fakeList(count) {
   const list = [];
 
   for (let i = 0; i < count; i += 1) {
     list.push({
       id: `fake-list-${i}`,
+      projectType: projectTypes[i % 5],
       owner: user[i % 10],
-      title: titles[i % 8],
+      title: titles[i % 5],
       avatar: avatars[i % 8],
       cover: parseInt(`${i / 4}`, 10) % 2 === 0 ? covers[i % 4] : covers[3 - (i % 4)],
       status: ['active', 'exception', 'normal'][i % 3],
