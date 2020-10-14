@@ -7,7 +7,11 @@ export default ({ location, history }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (location.query?.pid) return;
+    const pid = location.query?.pid;
+    if (pid) {
+      document.title = `详情 - ${pid}`;
+      return;
+    }
     history.push('/projectlist');
   }, []);
 

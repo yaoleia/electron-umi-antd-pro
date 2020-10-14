@@ -10,16 +10,23 @@ const { Paragraph } = Typography;
 
 const getKey = (id, index) => `${id}-${index}`;
 
-const ProjectList = ({ dispatch, projectList: { list = [] }, loading, history }) => {
+const ProjectList = ({ dispatch, projectList: { list = [] }, loading }) => {
   const [modalVisible, handleModalVisible] = useState(false);
-  useEffect(() => {
+  const getProjectList = () => {
     dispatch({
       type: 'projectList/fetch',
       payload: {
         count: 8,
       },
     });
-  }, []);
+  };
+  useEffect(() => {
+    window.addEventListener('focus', getProjectList);
+    return () => {
+      window.removeEventListener('focus', getProjectList);
+    };
+  });
+  useEffect(getProjectList, []);
   const cardList = list && (
     <List
       rowKey="id"
@@ -37,12 +44,13 @@ const ProjectList = ({ dispatch, projectList: { list = [] }, loading, history })
       renderItem={(item) => (
         <List.Item
           onClick={() => {
-            history.push({
-              pathname: '/projectlist/projectstep',
-              query: {
-                pid: item.title,
-              },
-            });
+            window.open(`/#/projectlist/projectstep?pid=${item.title}`, '_blank');
+            // history.push({
+            //   pathname: '/projectlist/projectstep',
+            //   query: {
+            //     pid: item.title,
+            //   },
+            // });
           }}
         >
           <Card className={styles.card} hoverable cover={<img alt={item.title} src={item.cover} />}>
@@ -98,17 +106,32 @@ const ProjectList = ({ dispatch, projectList: { list = [] }, loading, history })
           type="form"
           columns={[
             {
-              title: '规则名称',
+              title: '项目名称',
               dataIndex: 'name',
-              tip: '规则名称是唯一的 key',
               formItemProps: {
                 rules: [
                   {
                     required: true,
-                    message: '规则名称为必填项',
+                    message: '项目名称为必填项',
                   },
                 ],
               },
+            },
+            {
+              title: '项目类型',
+              dataIndex: 'type',
+              formItemProps: {
+                rules: [
+                  {
+                    required: true,
+                    message: '项目名称为必填项',
+                  },
+                ],
+              },
+            },
+            {
+              title: '项目描述',
+              dataIndex: 'description',
             },
           ]}
         />
