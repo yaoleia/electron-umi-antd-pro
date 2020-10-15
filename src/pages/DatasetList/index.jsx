@@ -202,6 +202,7 @@ const TableList = () => {
         headerTitle="查询表格"
         actionRef={actionRef}
         rowKey="key"
+        options={{ fullScreen: false }}
         search={{
           labelWidth: 120,
         }}
