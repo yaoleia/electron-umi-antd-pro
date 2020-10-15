@@ -9,19 +9,19 @@ class AvatarDropdown extends React.Component {
   onMenuClick = (event) => {
     const { key } = event;
 
+    if (key === 'settings') {
+      history.push('/accountsettings');
+      return;
+    }
+
     if (key === 'logout') {
       const { dispatch } = this.props;
-
       if (dispatch) {
         dispatch({
           type: 'login/logout',
         });
       }
-
-      return;
     }
-
-    history.push(`/account/${key}`);
   };
 
   render() {
@@ -40,14 +40,11 @@ class AvatarDropdown extends React.Component {
             个人中心
           </Menu.Item>
         )}
-        {menu && (
-          <Menu.Item key="settings">
-            <SettingOutlined />
-            个人设置
-          </Menu.Item>
-        )}
-        {menu && <Menu.Divider />}
-
+        <Menu.Item key="settings">
+          <SettingOutlined />
+          个人设置
+        </Menu.Item>
+        <Menu.Divider />
         <Menu.Item key="logout">
           <LogoutOutlined />
           退出登录

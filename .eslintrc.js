@@ -6,6 +6,7 @@ module.exports = {
     REACT_APP_ENV: true,
   },
   rules: {
+    'import/newline-after-import': 0,
     'consistent-return': 0,
     'import/no-extraneous-dependencies': 0,
     '@typescript-eslint/lines-between-class-members': 0,

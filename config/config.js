@@ -91,6 +91,13 @@ export default defineConfig({
               ],
             },
             {
+              name: '个人设置',
+              icon: 'smile',
+              hideInMenu: true,
+              path: '/accountsettings',
+              component: './AccountSettings',
+            },
+            {
               component: './404',
             },
           ],

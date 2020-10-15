@@ -1,8 +1,11 @@
-import { queryCurrent, query as queryUsers } from '@/services/user';
+import { queryCity, queryProvince, queryCurrent, query as queryUsers } from '@/services/user';
 const UserModel = {
   namespace: 'user',
   state: {
     currentUser: {},
+    province: [],
+    city: [],
+    isLoading: false,
   },
   effects: {
     *fetch(_, { call, put }) {
@@ -17,6 +20,26 @@ const UserModel = {
       const response = yield call(queryCurrent);
       yield put({
         type: 'saveCurrentUser',
+        payload: response,
+      });
+    },
+
+    *fetchProvince(_, { call, put }) {
+      yield put({
+        type: 'changeLoading',
+        payload: true,
+      });
+      const response = yield call(queryProvince);
+      yield put({
+        type: 'setProvince',
+        payload: response,
+      });
+    },
+
+    *fetchCity({ payload }, { call, put }) {
+      const response = yield call(queryCity, payload);
+      yield put({
+        type: 'setCity',
         payload: response,
       });
     },
@@ -40,6 +63,17 @@ const UserModel = {
           unreadCount: action.payload.unreadCount,
         },
       };
+    },
+    setProvince(state, action) {
+      return { ...state, province: action.payload };
+    },
+
+    setCity(state, action) {
+      return { ...state, city: action.payload };
+    },
+
+    changeLoading(state, action) {
+      return { ...state, isLoading: action.payload };
     },
   },
 };
