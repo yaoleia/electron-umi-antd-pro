@@ -197,7 +197,7 @@ const UpdateForm = (props) => {
         padding: '32px 40px 48px',
       }}
       destroyOnClose
-      title="规则配置"
+      title="数据集配置"
       visible={updateModalVisible}
       footer={renderFooter()}
       onCancel={() => handleUpdateModalVisible()}
@@ -210,8 +210,8 @@ const UpdateForm = (props) => {
         current={currentStep}
       >
         <Step title="基本信息" />
-        <Step title="配置规则属性" />
-        <Step title="设定调度周期" />
+        <Step title="标签列表" />
+        <Step title="数据上传" />
       </Steps>
       <Form
         {...formLayout}
