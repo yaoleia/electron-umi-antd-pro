@@ -17,7 +17,6 @@ export interface CardListItemDataType {
   body?: any;
   updatedAt: number;
   createdAt: number;
-  subDescription: string;
   description: string;
   activeUser: number;
   newUser: number;

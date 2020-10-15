@@ -23,12 +23,15 @@ class ModelList extends Component {
       modelList: { list },
       loading,
     } = this.props;
+    const types = {
+      defect: '缺陷检测',
+      position: '目标检测',
+      classification: '分类',
+      ocr: '字符识别',
+      keypoint: '关键点检测',
+    };
     const content = (
       <div className={styles.pageHeaderContent}>
-        <p>
-          段落示意：蚂蚁金服务设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，
-          提供跨越设计与开发的体验解决方案。
-        </p>
         <div className={styles.contentLink}>
           <a>
             <img alt="" src="https://gw.alipayobjects.com/zos/rmsportal/MjEImQtenlyueSmVEfUD.svg" />{' '}
@@ -40,22 +43,14 @@ class ModelList extends Component {
           </a>
           <a>
             <img alt="" src="https://gw.alipayobjects.com/zos/rmsportal/ohOEPSYdDTNnyMbGuyLb.svg" />{' '}
-            产品文档
+            模型接口文档
           </a>
         </div>
       </div>
     );
-    const extraContent = (
-      <div className={styles.extraImg}>
-        <img
-          alt="这是一个标题"
-          src="https://gw.alipayobjects.com/zos/rmsportal/RzwpdLnhmvDJToTdfDPe.png"
-        />
-      </div>
-    );
     const nullData = {};
     return (
-      <PageContainer content={content} extraContent={extraContent}>
+      <PageContainer content={content}>
         <div className={styles.cardList}>
           <List
             rowKey="id"
@@ -77,11 +72,20 @@ class ModelList extends Component {
                     <Card
                       hoverable
                       className={styles.card}
-                      actions={[<a key="option1">操作一</a>, <a key="option2">操作二</a>]}
+                      actions={[
+                        <a key="info">查看信息</a>,
+                        <a key="preview">预览</a>,
+                        <a key="remove">删除</a>,
+                      ]}
                     >
                       <Card.Meta
                         avatar={<img alt="" className={styles.cardAvatar} src={item.avatar} />}
-                        title={<a>{item.title}</a>}
+                        title={
+                          <>
+                            <a>{item.title}</a> -{' '}
+                            <i>{types[item.projectType] || item.projectType}</i>
+                          </>
+                        }
                         description={
                           <Paragraph
                             className={styles.item}
@@ -101,7 +105,7 @@ class ModelList extends Component {
               return (
                 <List.Item>
                   <Button type="dashed" className={styles.newButton}>
-                    <PlusOutlined /> 新增产品
+                    <PlusOutlined /> 上传模型
                   </Button>
                 </List.Item>
               );

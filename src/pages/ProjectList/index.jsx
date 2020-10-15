@@ -79,7 +79,7 @@ const ProjectList = ({ dispatch, projectList: { list = [] }, loading }) => {
                     rows: 2,
                   }}
                 >
-                  {item.subDescription}
+                  {item.description}
                 </Paragraph>
               }
             />
@@ -166,12 +166,7 @@ const ProjectList = ({ dispatch, projectList: { list = [] }, loading }) => {
               </ProFormRadio.Button>
             ))}
           </ProFormRadio.Group>
-          <ProFormTextArea
-            width="100%"
-            name="subDescription"
-            label="备注"
-            placeholder="请输入备注"
-          />
+          <ProFormTextArea width="100%" name="description" label="备注" placeholder="请输入备注" />
         </ProForm>
       </Modal>
     </div>
