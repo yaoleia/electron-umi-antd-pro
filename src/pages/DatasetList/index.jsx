@@ -1,5 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, Divider, message, Input, Drawer } from 'antd';
+import { Button, Divider, message, Input, Drawer, Modal } from 'antd';
 import React, { useState, useRef } from 'react';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import ProTable from '@ant-design/pro-table';
@@ -168,7 +168,28 @@ const TableList = () => {
             配置
           </a>
           <Divider type="vertical" />
-          <a>删除</a>
+          <a
+            onClick={async () => {
+              Modal.confirm({
+                title: '删除数据集',
+                content: `确定删除该数据集(${record.name})吗？`,
+                okText: '确认',
+                cancelText: '取消',
+                centered: true,
+                maskClosable: true,
+                onOk: async () => {
+                  const success = await handleRemove([record]);
+                  if (success) {
+                    if (actionRef.current) {
+                      actionRef.current.reload();
+                    }
+                  }
+                },
+              });
+            }}
+          >
+            删除
+          </a>
           <Divider type="vertical" />
           <a>标注</a>
         </>
