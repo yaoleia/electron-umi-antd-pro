@@ -76,7 +76,7 @@ export default defineConfig({
             },
             {
               path: '/admin',
-              name: 'admin',
+              name: '权限',
               icon: 'crown',
               component: './Admin',
               authority: ['admin'],
