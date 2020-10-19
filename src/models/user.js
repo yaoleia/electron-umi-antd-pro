@@ -1,4 +1,4 @@
-import { queryCurrent, query as queryUsers } from '@/services/user';
+import { queryCurrent, putUser } from '@/services/user';
 
 const UserModel = {
   namespace: 'user',
@@ -7,11 +7,11 @@ const UserModel = {
     isLoading: false,
   },
   effects: {
-    *fetch(_, { call, put }) {
-      const response = yield call(queryUsers);
+    *fetch({ payload }, { call, put }) {
+      const resp = yield call(putUser, payload);
       yield put({
-        type: 'save',
-        payload: response,
+        type: 'saveCurrentUser',
+        payload: resp,
       });
     },
 
@@ -22,43 +22,10 @@ const UserModel = {
         payload: response,
       });
     },
-
-    *fetchProvince({ payload }, { put }) {
-      yield put({
-        type: 'changeLoading',
-        payload: true,
-      });
-      yield put({
-        type: 'setProvince',
-        payload,
-      });
-    },
-
-    *fetchCity({ payload }, { put }) {
-      yield put({
-        type: 'setCity',
-        payload,
-      });
-    },
   },
   reducers: {
     saveCurrentUser(state, action) {
       return { ...state, currentUser: action.payload || {} };
-    },
-    setProvince(state, action) {
-      const { geographic } = state.currentUser;
-      if (geographic) {
-        Object.assign(geographic, { province: action.payload.province });
-      }
-      return { ...state };
-    },
-
-    setCity(state, action) {
-      const { geographic } = state.currentUser;
-      if (geographic) {
-        Object.assign(geographic, { city: action.payload.city });
-      }
-      return { ...state };
     },
 
     changeLoading(state, action) {

@@ -23,20 +23,6 @@ const AvatarView = ({ avatar }) => (
   </>
 );
 
-const validatorGeographic = (_, value, callback) => {
-  // const { province, city } = value;
-
-  // if (!province.key) {
-  //   callback('Please input your province!');
-  // }
-
-  // if (!city.key) {
-  //   callback('Please input your city!');
-  // }
-
-  callback();
-};
-
 class BaseView extends Component {
   view = undefined;
 
@@ -58,15 +44,11 @@ class BaseView extends Component {
   getViewDom = (ref) => {
     this.view = ref;
   };
-  handleFinish = ({ geographic }) => {
+  handleFinish = (values) => {
     const { dispatch } = this.props;
     dispatch({
-      type: 'user/fetchProvince',
-      payload: { ...geographic },
-    });
-    dispatch({
-      type: 'user/fetchCity',
-      payload: { ...geographic },
+      type: 'user/fetch',
+      payload: { ...values },
     });
     message.success('个人设置保存成功！');
   };
@@ -120,9 +102,6 @@ class BaseView extends Component {
                       {
                         required: true,
                         message: '请选择地区',
-                      },
-                      {
-                        validator: validatorGeographic,
                       },
                     ]}
                   >
