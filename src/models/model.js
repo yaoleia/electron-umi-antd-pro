@@ -1,4 +1,4 @@
-import { queryFakeList } from './service';
+import { queryFakeList } from '@/services/model';
 
 const Model = {
   namespace: 'modelList',

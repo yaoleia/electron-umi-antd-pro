@@ -58,7 +58,16 @@ class BaseView extends Component {
   getViewDom = (ref) => {
     this.view = ref;
   };
-  handleFinish = () => {
+  handleFinish = ({ geographic }) => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'user/fetchProvince',
+      payload: { ...geographic },
+    });
+    dispatch({
+      type: 'user/fetchCity',
+      payload: { ...geographic },
+    });
     message.success('个人设置保存成功！');
   };
 

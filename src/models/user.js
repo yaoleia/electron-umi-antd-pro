@@ -1,10 +1,9 @@
-import { queryCity, queryProvince, queryCurrent, query as queryUsers } from '@/services/user';
+import { queryCurrent, query as queryUsers } from '@/services/user';
+
 const UserModel = {
   namespace: 'user',
   state: {
     currentUser: {},
-    province: [],
-    city: [],
     isLoading: false,
   },
   effects: {
@@ -24,23 +23,21 @@ const UserModel = {
       });
     },
 
-    *fetchProvince(_, { call, put }) {
+    *fetchProvince({ payload }, { put }) {
       yield put({
         type: 'changeLoading',
         payload: true,
       });
-      const response = yield call(queryProvince);
       yield put({
         type: 'setProvince',
-        payload: response,
+        payload,
       });
     },
 
-    *fetchCity({ payload }, { call, put }) {
-      const response = yield call(queryCity, payload);
+    *fetchCity({ payload }, { put }) {
       yield put({
         type: 'setCity',
-        payload: response,
+        payload,
       });
     },
   },
@@ -48,28 +45,20 @@ const UserModel = {
     saveCurrentUser(state, action) {
       return { ...state, currentUser: action.payload || {} };
     },
-
-    changeNotifyCount(
-      state = {
-        currentUser: {},
-      },
-      action,
-    ) {
-      return {
-        ...state,
-        currentUser: {
-          ...state.currentUser,
-          notifyCount: action.payload.totalCount,
-          unreadCount: action.payload.unreadCount,
-        },
-      };
-    },
     setProvince(state, action) {
-      return { ...state, province: action.payload };
+      const { geographic } = state.currentUser;
+      if (geographic) {
+        Object.assign(geographic, { province: action.payload.province });
+      }
+      return { ...state };
     },
 
     setCity(state, action) {
-      return { ...state, city: action.payload };
+      const { geographic } = state.currentUser;
+      if (geographic) {
+        Object.assign(geographic, { city: action.payload.city });
+      }
+      return { ...state };
     },
 
     changeLoading(state, action) {

@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { Select, Spin } from 'antd';
 import { connect } from 'umi';
+import cities from '@/assets/geographic/city.json';
+import provinces from '@/assets/geographic/province.json';
 import styles from './GeographicView.less';
+
 const { Option } = Select;
 const nullSelectItem = {
   label: '',
@@ -10,48 +13,21 @@ const nullSelectItem = {
 };
 
 class GeographicView extends Component {
-  componentDidMount = () => {
-    const { dispatch } = this.props;
+  constructor(props) {
+    super(props);
+    this.state = {
+      cities: [],
+      provinces,
+    };
+  }
 
-    if (dispatch) {
-      dispatch({
-        type: 'user/fetchProvince',
-      });
-    }
-  };
-
-  componentDidUpdate(props) {
-    const { dispatch, value } = this.props;
-
-    if (!props.value && !!value && !!value.province) {
-      if (dispatch) {
-        dispatch({
-          type: 'user/fetchCity',
-          payload: value.province.key,
-        });
-      }
+  UNSAFE_componentWillMount() {
+    const { province } = this.props.value;
+    if (province?.key) {
+      this.setState({ cities: cities[province.key] });
     }
   }
 
-  getProvinceOption() {
-    const { province } = this.props;
-
-    if (province) {
-      return this.getOption(province);
-    }
-
-    return [];
-  }
-
-  getCityOption = () => {
-    const { city } = this.props;
-
-    if (city) {
-      return this.getOption(city);
-    }
-
-    return [];
-  };
   getOption = (list) => {
     if (!list || list.length < 1) {
       return (
@@ -67,15 +43,10 @@ class GeographicView extends Component {
       </Option>
     ));
   };
-  selectProvinceItem = (item) => {
-    const { dispatch, onChange } = this.props;
 
-    if (dispatch) {
-      dispatch({
-        type: 'user/fetchCity',
-        payload: item.key,
-      });
-    }
+  selectProvinceItem = (item) => {
+    const { onChange } = this.props;
+    this.setState({ cities: cities[item.key] });
 
     if (onChange) {
       onChange({
@@ -84,6 +55,7 @@ class GeographicView extends Component {
       });
     }
   };
+
   selectCityItem = (item) => {
     const { value, onChange } = this.props;
 
@@ -104,7 +76,6 @@ class GeographicView extends Component {
         city: nullSelectItem,
       };
     }
-
     const { province, city } = value;
     return {
       province: province || nullSelectItem,
@@ -124,7 +95,7 @@ class GeographicView extends Component {
           showSearch
           onSelect={this.selectProvinceItem}
         >
-          {this.getProvinceOption()}
+          {this.getOption(this.state.provinces)}
         </Select>
         <Select
           className={styles.item}
@@ -133,18 +104,15 @@ class GeographicView extends Component {
           showSearch
           onSelect={this.selectCityItem}
         >
-          {this.getCityOption()}
+          {this.getOption(this.state.cities)}
         </Select>
       </Spin>
     );
   }
 }
 
-export default connect(({ user, loading }) => {
-  const { province, city } = user;
+export default connect(({ loading }) => {
   return {
-    province,
-    city,
     loading: loading.models.user,
   };
 })(GeographicView);
