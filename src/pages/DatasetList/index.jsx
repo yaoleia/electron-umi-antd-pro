@@ -35,11 +35,7 @@ const handleUpdate = async (fields) => {
   const hide = message.loading('正在配置');
 
   try {
-    await updateRule({
-      name: fields.name,
-      desc: fields.desc,
-      key: fields.key,
-    });
+    await updateRule(fields);
     hide();
     message.success('配置成功');
     return true;

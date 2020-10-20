@@ -2,9 +2,9 @@ import { Tag, Button } from 'antd';
 import React, { useState, useEffect } from 'react';
 import { connect } from 'umi';
 import screenfull from 'screenfull';
+import { FullscreenOutlined, FullscreenExitOutlined } from '@ant-design/icons';
 import Avatar from './AvatarDropdown';
 import styles from './index.less';
-import { FullscreenOutlined, FullscreenExitOutlined } from '@ant-design/icons';
 
 const ENVTagColor = {
   dev: 'orange',

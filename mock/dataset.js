@@ -23,6 +23,7 @@ const genList = (current, pageSize) => {
       updatedAt: new Date(),
       createdAt: new Date(),
       progress: Math.ceil(Math.random() * 100),
+      labels: ['1', '2', '3'],
     });
   }
 
@@ -114,7 +115,7 @@ function postRule(req, res, u, b) {
   }
 
   const body = (b && b.body) || req.body;
-  const { method, name, desc, key } = body;
+  const { method, key, ...attrs } = body;
 
   switch (method) {
     /* eslint no-case-declarations:0 */
@@ -132,14 +133,13 @@ function postRule(req, res, u, b) {
             'https://gw.alipayobjects.com/zos/rmsportal/eeHMaZBwmTvLdIwMfBpg.png',
             'https://gw.alipayobjects.com/zos/rmsportal/udxAbMEhpwthVVcjLXik.png',
           ][i % 2],
-          name,
           owner: '曲丽丽',
-          desc,
           callNo: Math.floor(Math.random() * 1000),
           status: Math.floor(Math.random() * 10) % 2,
           updatedAt: new Date(),
           createdAt: new Date(),
           progress: Math.ceil(Math.random() * 100),
+          ...attrs,
         };
         tableListDataSource.unshift(newRule);
         return res.json(newRule);
@@ -152,8 +152,8 @@ function postRule(req, res, u, b) {
         let newRule = {};
         tableListDataSource = tableListDataSource.map((item) => {
           if (item.key === key) {
-            newRule = { ...item, desc, name };
-            return { ...item, desc, name };
+            newRule = { ...item, ...attrs };
+            return { ...item, ...attrs };
           }
 
           return item;

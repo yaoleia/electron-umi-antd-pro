@@ -6,6 +6,8 @@ module.exports = {
     REACT_APP_ENV: true,
   },
   rules: {
+    'no-loop-func': 0,
+    'no-param-reassign': 0,
     'import/newline-after-import': 0,
     'consistent-return': 0,
     'import/no-extraneous-dependencies': 0,
