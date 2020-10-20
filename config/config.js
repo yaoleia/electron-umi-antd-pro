@@ -93,7 +93,7 @@ export default defineConfig({
               icon: 'ProjectOutlined',
               path: '/projectworkplace',
               component: './ProjectWorkplace',
-              headerRender: false,
+              // headerRender: false,
               layout: 'top',
               hideInMenu: true,
             },
