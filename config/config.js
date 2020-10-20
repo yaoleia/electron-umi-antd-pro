@@ -48,15 +48,6 @@ export default defineConfig({
               redirect: '/projectlist',
             },
             {
-              name: '详情',
-              icon: 'ProjectOutlined',
-              path: '/projectlist/projectstep',
-              component: './ProjectStep',
-              headerRender: false,
-              layout: 'top',
-              hideInMenu: true,
-            },
-            {
               name: '项目',
               icon: 'ProjectOutlined',
               path: '/projectlist',
@@ -96,6 +87,15 @@ export default defineConfig({
               hideInMenu: true,
               path: '/accountsettings',
               component: './AccountSettings',
+            },
+            {
+              name: '工作台',
+              icon: 'ProjectOutlined',
+              path: '/projectworkplace',
+              component: './ProjectWorkplace',
+              headerRender: false,
+              layout: 'top',
+              hideInMenu: true,
             },
             {
               component: './404',
