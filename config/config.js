@@ -94,7 +94,7 @@ export default defineConfig({
               path: '/projectworkplace',
               component: './ProjectWorkplace',
               headerRender: false,
-              layout: 'top',
+              hideMenu: true,
               hideInMenu: true,
             },
             {

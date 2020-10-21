@@ -79,6 +79,10 @@ const BasicLayout = (props) => {
       logo={logo}
       onCollapse={handleMenuCollapse}
       onMenuHeaderClick={() => history.push('/')}
+      menuRender={({ breadcrumb, location: { pathname } }, dom) => {
+        const { hideMenu } = breadcrumb[pathname] || {};
+        return <div className={hideMenu ? 'hide-menu' : ''}>{dom}</div>;
+      }}
       menuItemRender={(menuItemProps, defaultDom) => {
         if (menuItemProps.isUrl || !menuItemProps.path) {
           return defaultDom;
