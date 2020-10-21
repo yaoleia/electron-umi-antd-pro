@@ -5,6 +5,7 @@ import moment from 'moment';
 import { RollbackOutlined } from '@ant-design/icons';
 import Radar from './components/Radar';
 import EditableLinkGroup from './components/EditableLinkGroup';
+import ScreenFull from '@/components/ScreenFull';
 import styles from './style.less';
 
 const { Step } = Steps;
@@ -165,9 +166,10 @@ const ProjectWorkplace = ({ location: { query = {} }, history, currentUser }) =>
         }}
         title={
           <>
-            <Link to="/">
+            <Link className={styles.goBack} to="/">
               <RollbackOutlined />
             </Link>
+            <ScreenFull />
             <span className={styles.projectTitle}>{`当前项目: ${query.pid || ''}`}</span>
           </>
         }
@@ -190,7 +192,7 @@ const ProjectWorkplace = ({ location: { query = {} }, history, currentUser }) =>
               </Button>
             )}
             {current === steps.length - 1 && (
-              <Button type="primary" onClick={() => message.success('Processing complete!')}>
+              <Button type="primary" onClick={() => message.success('模型已保存!')}>
                 保存模型
               </Button>
             )}

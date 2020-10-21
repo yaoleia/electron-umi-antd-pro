@@ -1,10 +1,9 @@
-import { Tag, Button } from 'antd';
-import React, { useState, useEffect } from 'react';
+import { Tag } from 'antd';
+import React from 'react';
 import { connect } from 'umi';
-import screenfull from 'screenfull';
-import { FullscreenOutlined, FullscreenExitOutlined } from '@ant-design/icons';
 import Avatar from './AvatarDropdown';
 import styles from './index.less';
+import Screenfull from '../ScreenFull';
 
 const ENVTagColor = {
   dev: 'orange',
@@ -14,41 +13,15 @@ const ENVTagColor = {
 
 const GlobalHeaderRight = (props) => {
   const { theme, layout } = props;
-  const [isFullscreen, setFullScreen] = useState(false);
-  let className = styles.right;
 
+  let className = styles.right;
   if (theme === 'dark' && layout === 'top') {
     className = `${styles.right}  ${styles.dark}`;
   }
 
-  const handleFullScreen = () => {
-    if (!screenfull.isEnabled) {
-      return false;
-    }
-    screenfull.toggle();
-  };
-
-  const screenfullChange = () => setFullScreen(screenfull.isFullscreen);
-
-  useEffect(() => {
-    if (screenfull.isEnabled) {
-      screenfull.on('change', screenfullChange);
-    }
-    return () => {
-      if (screenfull.isEnabled) {
-        screenfull.off('change', screenfullChange);
-      }
-    };
-  }, []);
-
   return (
     <div className={className}>
-      <Button
-        type="text"
-        shape="circle"
-        onClick={() => handleFullScreen()}
-        icon={isFullscreen ? <FullscreenExitOutlined /> : <FullscreenOutlined />}
-      />
+      <Screenfull />
       <Avatar />
       {REACT_APP_ENV && (
         <span>
