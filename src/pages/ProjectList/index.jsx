@@ -12,7 +12,7 @@ const { Paragraph } = Typography;
 
 const getKey = (id, index) => `${id}-${index}`;
 
-const ProjectList = ({ dispatch, projectList: { list = [] }, loading }) => {
+const ProjectList = ({ dispatch, projectList: { list = [] }, loading, history }) => {
   const [modalVisible, handleModalVisible] = useState(false);
   const [tags, handleTagsChange] = useState([]);
   const getProjectList = () => {
@@ -56,13 +56,13 @@ const ProjectList = ({ dispatch, projectList: { list = [] }, loading }) => {
       renderItem={(item) => (
         <List.Item
           onClick={() => {
-            window.open(`/#/projectworkplace?pid=${item.id}`, '_blank');
-            // history.push({
-            //   pathname: '/projectworkplace',
-            //   query: {
-            //     pid: item.title,
-            //   },
-            // });
+            // window.open(`/#/projectworkplace?pid=${item.id}`, '_blank');
+            history.push({
+              pathname: '/projectworkplace',
+              query: {
+                pid: item.title,
+              },
+            });
           }}
         >
           <Card className={styles.card} hoverable cover={<img alt={item.title} src={item.cover} />}>
