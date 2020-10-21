@@ -1,10 +1,26 @@
-import { Avatar, Card, Col, List, Row } from 'antd';
-import React, { Component } from 'react';
+import { Avatar, Card, Col, List, Row, Steps, Button, message } from 'antd';
+import React, { useState, useEffect } from 'react';
 import { Link, connect } from 'umi';
 import moment from 'moment';
+import { RollbackOutlined } from '@ant-design/icons';
 import Radar from './components/Radar';
 import EditableLinkGroup from './components/EditableLinkGroup';
 import styles from './style.less';
+
+const { Step } = Steps;
+
+const steps = [
+  {
+    title: '数据',
+  },
+  {
+    title: '训练',
+  },
+  {
+    title: '评估',
+  },
+];
+
 const links = [
   {
     title: '操作一',
@@ -32,35 +48,20 @@ const links = [
   },
 ];
 
-class DashboardWorkplace extends Component {
-  UNSAFE_componentWillMount() {
-    const {
-      location: { query = {} },
-      history,
-    } = this.props;
+const ProjectWorkplace = ({ location: { query = {} }, history, currentUser }) => {
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
     const { pid } = query;
     if (pid) {
       document.title = `工作台 - ${pid}`;
       return;
     }
+
     history.push('/projectlist');
-  }
+  }, []);
 
-  componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'dashboardWorkplace/init',
-    });
-  }
-
-  componentWillUnmount() {
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'dashboardWorkplace/clear',
-    });
-  }
-
-  renderActivities = (item) => {
+  const renderActivities = (item) => {
     const events = item.template.split(/@\{([^{}]*)\}/gi).map((key) => {
       if (item[key]) {
         return (
@@ -93,90 +94,122 @@ class DashboardWorkplace extends Component {
     );
   };
 
-  render() {
-    const {
-      currentUser,
-      location: { query = {} },
-    } = this.props;
-
-    if (!currentUser || !currentUser.userid) {
-      return null;
-    }
-
-    return (
-      <div>
-        <Row gutter={24}>
-          <Col xl={16} lg={24} md={24} sm={24} xs={24}>
-            <Card
-              className={styles.projectList}
-              style={{
-                marginBottom: 24,
-              }}
-              title={`当前项目: ${query.pid || ''}`}
-              bordered={false}
-              extra={<Link to="/">全部项目</Link>}
-              bodyStyle={{
-                padding: 0,
-              }}
-            ></Card>
-            <Card
-              bodyStyle={{
-                padding: 0,
-              }}
-              bordered={false}
-              className={styles.activeCard}
-              title="动态"
-            >
-              <List
-                renderItem={(item) => this.renderActivities(item)}
-                className={styles.activitiesList}
-                size="large"
-              />
-            </Card>
-          </Col>
-          <Col xl={8} lg={24} md={24} sm={24} xs={24}>
-            <Card
-              style={{
-                marginBottom: 24,
-              }}
-              title="快速开始 / 便捷导航"
-              bordered={false}
-              bodyStyle={{
-                padding: 0,
-              }}
-            >
-              <EditableLinkGroup onAdd={() => {}} links={links} linkElement={Link} />
-            </Card>
-            <Card
-              style={{
-                marginBottom: 24,
-              }}
-              bordered={false}
-              title="XX 指数"
-            >
-              <div className={styles.chart}>
-                <Radar hasLegend height={343} />
-              </div>
-            </Card>
-            <Card
-              bodyStyle={{
-                paddingTop: 12,
-                paddingBottom: 12,
-              }}
-              bordered={false}
-              title="团队"
-            >
-              <div className={styles.members}>
-                <Row gutter={48}></Row>
-              </div>
-            </Card>
-          </Col>
-        </Row>
-      </div>
-    );
+  if (!currentUser || !currentUser.userid) {
+    return null;
   }
-}
+
+  const Dataset = () => (
+    <Row gutter={24}>
+      <Col xl={16} lg={24} md={24} sm={24} xs={24}>
+        <Card
+          bodyStyle={{
+            padding: 0,
+          }}
+          bordered={false}
+          className={styles.activeCard}
+          title="动态"
+        >
+          <List
+            renderItem={(item) => renderActivities(item)}
+            className={styles.activitiesList}
+            size="large"
+          />
+        </Card>
+      </Col>
+      <Col xl={8} lg={24} md={24} sm={24} xs={24}>
+        <Card
+          style={{
+            marginBottom: 24,
+          }}
+          title="快速开始 / 便捷导航"
+          bordered={false}
+          bodyStyle={{
+            padding: 0,
+          }}
+        >
+          <EditableLinkGroup onAdd={() => {}} links={links} linkElement={Link} />
+        </Card>
+        <Card
+          style={{
+            marginBottom: 24,
+          }}
+          bordered={false}
+          title="XX 指数"
+        >
+          <div className={styles.chart}>
+            <Radar hasLegend height={343} />
+          </div>
+        </Card>
+        <Card
+          bodyStyle={{
+            paddingTop: 12,
+            paddingBottom: 12,
+          }}
+          bordered={false}
+          title="团队"
+        >
+          <div className={styles.members}>
+            <Row gutter={48}></Row>
+          </div>
+        </Card>
+      </Col>
+    </Row>
+  );
+
+  return (
+    <div className={styles.container}>
+      <Card
+        className={styles.projectList}
+        style={{
+          marginBottom: 24,
+        }}
+        title={
+          <>
+            <Link to="/">
+              <RollbackOutlined />
+            </Link>
+            <span className={styles.projectTitle}>{`当前项目: ${query.pid || ''}`}</span>
+          </>
+        }
+        bordered={false}
+        extra={
+          <div className="steps-action">
+            {current > 0 && (
+              <Button
+                style={{
+                  marginRight: 10,
+                }}
+                onClick={() => setCurrent(current - 1)}
+              >
+                上一步
+              </Button>
+            )}
+            {current < steps.length - 1 && (
+              <Button type="primary" onClick={() => setCurrent(current + 1)}>
+                下一步
+              </Button>
+            )}
+            {current === steps.length - 1 && (
+              <Button type="primary" onClick={() => message.success('Processing complete!')}>
+                保存模型
+              </Button>
+            )}
+          </div>
+        }
+        bodyStyle={{
+          padding: 0,
+        }}
+      ></Card>
+      <Steps current={current} className={styles.stepContainer}>
+        {steps.map((item) => (
+          <Step key={item.title} title={item.title} />
+        ))}
+      </Steps>
+      {current === 0 && <Dataset />}
+    </div>
+  );
+};
 
 export default connect(({ user }) => ({
   currentUser: user.currentUser,
-}))(DashboardWorkplace);
+}))(ProjectWorkplace);
