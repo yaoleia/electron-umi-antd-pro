@@ -4,7 +4,7 @@ import screenfull from 'screenfull';
 import { FullscreenOutlined, FullscreenExitOutlined } from '@ant-design/icons';
 
 export default () => {
-  const [isFullscreen, setFullScreen] = useState(false);
+  const [isFullscreen, setFullScreen] = useState(screenfull.isEnabled && screenfull.isFullscreen);
   const handleFullScreen = () => {
     if (!screenfull.isEnabled) {
       return false;

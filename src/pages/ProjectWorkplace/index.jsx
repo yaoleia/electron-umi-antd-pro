@@ -167,7 +167,7 @@ const ProjectWorkplace = ({ location: { query = {} }, history, currentUser }) =>
         title={
           <>
             <Link className={styles.goBack} to="/">
-              <RollbackOutlined />
+              <RollbackOutlined /> 返回
             </Link>
             <ScreenFull />
             <span className={styles.projectTitle}>{`当前项目: ${query.pid || ''}`}</span>
