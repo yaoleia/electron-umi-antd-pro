@@ -1,5 +1,10 @@
 import { app, BrowserWindow } from 'electron';
 import * as path from 'path';
+import installExtension, {
+  REACT_DEVELOPER_TOOLS,
+  REDUX_DEVTOOLS,
+  REACT_PERF,
+} from 'electron-devtools-installer';
 
 let mainWindow = null;
 
@@ -28,7 +33,17 @@ function createWindow() {
   });
 }
 
-app.on('ready', createWindow);
+app.on('ready', () => {
+  devtoolsInstall();
+  createWindow();
+});
+
+function devtoolsInstall() {
+  if (process.env.NODE_ENV !== 'development') return;
+  installExtension(REACT_DEVELOPER_TOOLS);
+  installExtension(REDUX_DEVTOOLS);
+  installExtension(REACT_PERF);
+}
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
