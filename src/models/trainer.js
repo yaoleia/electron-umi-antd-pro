@@ -2,7 +2,6 @@ import { fakeChartData } from '@/services/trainer';
 
 const initState = {
   visitData: [],
-  visitData2: [],
   salesData: [],
   searchData: [],
   offlineData: [],

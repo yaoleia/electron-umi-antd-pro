@@ -6,7 +6,6 @@ import { connect } from 'umi';
 import { getTimeDistance } from '@/utils/utils';
 import PageLoading from '@/components/PageLoading';
 import styles from './style.less';
-const IntroduceRow = React.lazy(() => import('./components/IntroduceRow'));
 const SalesCard = React.lazy(() => import('./components/SalesCard'));
 const TopSearch = React.lazy(() => import('./components/TopSearch'));
 const ProportionSales = React.lazy(() => import('./components/ProportionSales'));
@@ -99,7 +98,6 @@ class DashboardAnalysis extends Component {
     const { dashboardAnalysis, loading } = this.props;
     const {
       visitData,
-      visitData2,
       salesData,
       searchData,
       offlineData,
@@ -134,9 +132,6 @@ class DashboardAnalysis extends Component {
       <GridContent>
         <React.Fragment>
           <Suspense fallback={<PageLoading />}>
-            <IntroduceRow loading={loading} visitData={visitData} />
-          </Suspense>
-          <Suspense fallback={null}>
             <SalesCard
               rangePickerValue={rangePickerValue}
               salesData={salesData}
@@ -156,7 +151,7 @@ class DashboardAnalysis extends Component {
               <Suspense fallback={null}>
                 <TopSearch
                   loading={loading}
-                  visitData2={visitData2}
+                  visitData={visitData}
                   searchData={searchData}
                   dropdownGroup={dropdownGroup}
                 />

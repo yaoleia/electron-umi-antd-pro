@@ -4,7 +4,7 @@ import React from 'react';
 import numeral from 'numeral';
 import { MiniArea } from '@/components/Charts';
 import NumberInfo from './NumberInfo';
-import Trend from './Trend';
+import Trend from '@/components/Trend';
 const columns = [
   {
     title: 'Rank',
@@ -42,7 +42,7 @@ const columns = [
   },
 ];
 
-const TopSearch = ({ loading, visitData2, searchData, dropdownGroup }) => (
+const TopSearch = ({ loading, visitData, searchData, dropdownGroup }) => (
   <Card
     loading={loading}
     bordered={false}
@@ -78,7 +78,7 @@ const TopSearch = ({ loading, visitData2, searchData, dropdownGroup }) => (
           status="up"
           subTotal={17.1}
         />
-        <MiniArea line height={45} data={visitData2} />
+        <MiniArea line height={45} data={visitData} />
       </Col>
       <Col
         sm={12}
@@ -105,7 +105,7 @@ const TopSearch = ({ loading, visitData2, searchData, dropdownGroup }) => (
           subTotal={26.2}
           gap={8}
         />
-        <MiniArea line height={45} data={visitData2} />
+        <MiniArea line height={45} data={visitData} />
       </Col>
     </Row>
     <Table

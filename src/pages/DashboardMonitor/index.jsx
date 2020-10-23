@@ -1,9 +1,11 @@
-import { Card, Col, Row, Statistic } from 'antd';
+import { Card, Col, Row, Statistic, Tooltip } from 'antd';
 import { connect } from 'umi';
 import React, { Component } from 'react';
+import { InfoCircleOutlined } from '@ant-design/icons';
 import { GridContent } from '@ant-design/pro-layout';
 import numeral from 'numeral';
-import { Pie, WaterWave, Gauge, TagCloud } from '@/components/Charts';
+import { Pie, WaterWave, Gauge, TagCloud, MiniProgress, ChartCard } from '@/components/Charts';
+import Trend from '@/components/Trend';
 import ActiveChart from './components/ActiveChart';
 import styles from './style.less';
 const { Countdown } = Statistic;
@@ -61,7 +63,44 @@ class DashboardMonitor extends Component {
                     />
                   </Col>
                 </Row>
-                <div className={styles.mapChart}>结果展示区域</div>
+                <div className={styles.mapChart}>
+                  <ChartCard
+                    loading={loading}
+                    bordered={false}
+                    title="Operational Effect"
+                    action={
+                      <Tooltip title="Introduce">
+                        <InfoCircleOutlined />
+                      </Tooltip>
+                    }
+                    total="78%"
+                    footer={
+                      <div
+                        style={{
+                          whiteSpace: 'nowrap',
+                          overflow: 'hidden',
+                        }}
+                      >
+                        <Trend
+                          flag="up"
+                          style={{
+                            marginRight: 16,
+                          }}
+                        >
+                          Weekly Changes
+                          <span>12%</span>
+                        </Trend>
+                        <Trend flag="down">
+                          Weekly Changes
+                          <span>11%</span>
+                        </Trend>
+                      </div>
+                    }
+                    contentHeight={46}
+                  >
+                    <MiniProgress percent={78} strokeWidth={8} target={80} color="#13C2C2" />
+                  </ChartCard>
+                </div>
               </Card>
             </Col>
             <Col xl={6} lg={24} md={24} sm={24} xs={24}>
