@@ -1,8 +1,8 @@
 import { Card, Radio } from 'antd';
 import React from 'react';
-import { Pie } from './Charts';
-import Yuan from './Yuan';
-import styles from '../style.less';
+import { Pie } from '@/components/Charts';
+import Yuan from '../Yuan';
+import styles from '../sales.less';
 
 const ProportionSales = ({
   dropdownGroup,

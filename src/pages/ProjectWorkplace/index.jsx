@@ -5,7 +5,7 @@ import moment from 'moment';
 import { RollbackOutlined } from '@ant-design/icons';
 import ScreenFull from '@/components/ScreenFull';
 import DashboardAnalysis from '@/pages/DashboardAnalysis';
-import Radar from './components/Radar';
+import DashboardMonitor from '@/pages/DashboardMonitor';
 import EditableLinkGroup from './components/EditableLinkGroup';
 import styles from './style.less';
 
@@ -138,9 +138,7 @@ const ProjectWorkplace = ({ location: { query = {} }, history, currentUser }) =>
           bordered={false}
           title="XX 指数"
         >
-          <div className={styles.chart}>
-            <Radar hasLegend height={343} />
-          </div>
+          <div className={styles.chart}>chart</div>
         </Card>
         <Card
           bodyStyle={{
@@ -210,6 +208,7 @@ const ProjectWorkplace = ({ location: { query = {} }, history, currentUser }) =>
       </Steps>
       {current === 0 && <Dataset />}
       {current === 1 && <DashboardAnalysis />}
+      {current === 2 && <DashboardMonitor />}
     </div>
   );
 };

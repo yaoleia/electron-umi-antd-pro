@@ -4,7 +4,7 @@ import React, { Component, Suspense } from 'react';
 import { GridContent } from '@ant-design/pro-layout';
 import { connect } from 'umi';
 import { getTimeDistance } from '@/utils/utils';
-import PageLoading from './components/PageLoading';
+import PageLoading from '@/components/PageLoading';
 import styles from './style.less';
 const IntroduceRow = React.lazy(() => import('./components/IntroduceRow'));
 const SalesCard = React.lazy(() => import('./components/SalesCard'));

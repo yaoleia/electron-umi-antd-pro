@@ -1,8 +1,8 @@
 import { Card, Col, DatePicker, Row, Tabs } from 'antd';
 import React from 'react';
 import numeral from 'numeral';
-import { Bar } from './Charts';
-import styles from '../style.less';
+import { Bar } from '@/components/Charts';
+import styles from '../sales.less';
 const { RangePicker } = DatePicker;
 const { TabPane } = Tabs;
 const rankingListData = [];

@@ -2,10 +2,10 @@ import { InfoCircleOutlined } from '@ant-design/icons';
 import { Col, Row, Tooltip } from 'antd';
 import React from 'react';
 import numeral from 'numeral';
-import { ChartCard, MiniArea, MiniBar, MiniProgress, Field } from './Charts';
-import Trend from './Trend';
-import Yuan from './Yuan';
-import styles from '../style.less';
+import { ChartCard, MiniArea, MiniBar, MiniProgress, Field } from '@/components/Charts';
+import Trend from '../Trend';
+import Yuan from '../Yuan';
+import styles from './style.less';
 const topColResponsiveProps = {
   xs: 24,
   sm: 12,

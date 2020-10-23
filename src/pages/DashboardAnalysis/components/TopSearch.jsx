@@ -2,10 +2,9 @@ import { InfoCircleOutlined } from '@ant-design/icons';
 import { Card, Col, Row, Table, Tooltip } from 'antd';
 import React from 'react';
 import numeral from 'numeral';
-import { MiniArea } from './Charts';
+import { MiniArea } from '@/components/Charts';
 import NumberInfo from './NumberInfo';
 import Trend from './Trend';
-import styles from '../style.less';
 const columns = [
   {
     title: 'Rank',
@@ -23,7 +22,6 @@ const columns = [
     dataIndex: 'count',
     key: 'count',
     sorter: (a, b) => a.count - b.count,
-    className: styles.alignRight,
   },
   {
     title: 'Weekly Range',

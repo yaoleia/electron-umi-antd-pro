@@ -1,0 +1,27 @@
+@import '~antd/es/style/themes/default.less';
+
+.offlineCard {
+  :global {
+    .ant-tabs-ink-bar {
+      bottom: auto;
+    }
+    .ant-tabs-bar {
+      border-bottom: none;
+    }
+    .ant-tabs-nav-container-scrolling {
+      padding-right: 40px;
+      padding-left: 40px;
+    }
+    .ant-tabs-tab-prev-icon::before {
+      position: relative;
+      left: 6px;
+    }
+    .ant-tabs-tab-next-icon::before {
+      position: relative;
+      right: 6px;
+    }
+    .ant-tabs-tab-active h4 {
+      color: @primary-color;
+    }
+  }
+}
