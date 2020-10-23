@@ -3,9 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { Link, connect } from 'umi';
 import moment from 'moment';
 import { RollbackOutlined } from '@ant-design/icons';
+import ScreenFull from '@/components/ScreenFull';
+import DashboardAnalysis from '@/pages/DashboardAnalysis';
 import Radar from './components/Radar';
 import EditableLinkGroup from './components/EditableLinkGroup';
-import ScreenFull from '@/components/ScreenFull';
 import styles from './style.less';
 
 const { Step } = Steps;
@@ -208,6 +209,7 @@ const ProjectWorkplace = ({ location: { query = {} }, history, currentUser }) =>
         ))}
       </Steps>
       {current === 0 && <Dataset />}
+      {current === 1 && <DashboardAnalysis />}
     </div>
   );
 };
