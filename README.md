@@ -1,8 +1,5 @@
 # electron-umi-antd-pro
 
-<img src="internals/img/electron.png" width="100%" />
-<img src="internals/img/web.png" width="100%" />
-
 ### 基于 umijs + electron + ant-design-pro 的模板
 
 ## 支持
@@ -14,6 +11,9 @@
 - ant-design-pro@^4.x
 
 ## 项目结构
+
+<img src="internals/img/electron.png" width="100%" />
+<img src="internals/img/web.png" width="100%" />
 
 ```ssh
 .
@@ -78,6 +78,7 @@
 或者同时启动主进程和渲染进程
 
 ```javascript
+  // 插入区块异常时，尝试 BABEL_CACHE=none yarn start
   $ yarn start
 ```
 
