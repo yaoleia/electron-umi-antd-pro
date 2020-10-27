@@ -1,0 +1,76 @@
+@import '~antd/es/style/themes/default.less';
+
+.textOverflow() {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
+}
+
+.title {
+  margin-left: 8px;
+}
+
+.goBack {
+  margin-right: 8px;
+}
+
+.cardWrap {
+  :global {
+    .ant-card-meta-description {
+      height: 44px;
+      overflow: hidden;
+      color: @text-color-secondary;
+      line-height: 22px;
+    }
+  }
+  .projectItemContent {
+    display: flex;
+    height: 20px;
+    margin-top: 8px;
+    overflow: hidden;
+    font-size: 12px;
+    line-height: 20px;
+    .textOverflow();
+    a {
+      display: inline-block;
+      flex: 1 1 0;
+      color: @text-color-secondary;
+      .textOverflow();
+      &:hover {
+        color: @primary-color;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: @screen-xl) and (min-width: @screen-lg) {
+  .activeCard {
+    margin-bottom: 24px;
+  }
+  .members {
+    margin-bottom: 0;
+  }
+  .extraContent {
+    margin-left: -44px;
+    .statItem {
+      padding: 0 16px;
+    }
+  }
+}
+
+@media screen and (max-width: @screen-md) {
+  .projectList {
+    .projectGrid {
+      width: 50%;
+    }
+  }
+}
+
+@media screen and (max-width: @screen-xs) {
+  .projectList {
+    .projectGrid {
+      width: 100%;
+    }
+  }
+}

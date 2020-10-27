@@ -2,10 +2,9 @@ import { Avatar, Card, Col, List, Row, Steps, Button, message } from 'antd';
 import React, { useState, useEffect } from 'react';
 import { Link, connect } from 'umi';
 import moment from 'moment';
-import { RollbackOutlined } from '@ant-design/icons';
-import ScreenFull from '@/components/ScreenFull';
 import DashboardAnalysis from '@/pages/DashboardAnalysis';
 import DashboardMonitor from '@/pages/DashboardMonitor';
+import PageHeader from '@/components/PageHeader';
 import EditableLinkGroup from './components/EditableLinkGroup';
 import styles from './style.less';
 
@@ -158,21 +157,8 @@ const ProjectWorkplace = ({ location: { query = {} }, history, currentUser }) =>
 
   return (
     <div>
-      <Card
-        className={styles.projectList}
-        style={{
-          marginBottom: 24,
-        }}
-        title={
-          <>
-            <Link className={styles.goBack} to="/">
-              <RollbackOutlined /> 返回
-            </Link>
-            <ScreenFull />
-            <span className={styles.projectTitle}>{`当前项目: ${query.pid || ''}`}</span>
-          </>
-        }
-        bordered={false}
+      <PageHeader
+        name={`当前项目: ${query.pid || ''}`}
         extra={
           <div className="steps-action">
             {current > 0 && (
@@ -197,10 +183,7 @@ const ProjectWorkplace = ({ location: { query = {} }, history, currentUser }) =>
             )}
           </div>
         }
-        bodyStyle={{
-          padding: 0,
-        }}
-      ></Card>
+      />
       <Steps current={current} className={styles.stepContainer}>
         {steps.map((item) => (
           <Step key={item.title} title={item.title} />
