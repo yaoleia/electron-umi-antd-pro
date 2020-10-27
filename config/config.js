@@ -98,6 +98,15 @@ export default defineConfig({
               hideInMenu: true,
             },
             {
+              name: '数据标注',
+              icon: 'smile',
+              path: '/imagemapeditor',
+              component: './ImageMapEditor',
+              headerRender: false,
+              hideMenu: true,
+              hideInMenu: true,
+            },
+            {
               component: './404',
             },
           ],

@@ -46,6 +46,13 @@ ol {
   .ant-layout-sider {
     position: static !important;
   }
+  & + .ant-layout {
+    .ant-layout-content {
+      > div {
+        margin: -24px;
+      }
+    }
+  }
 }
 
 ::-webkit-scrollbar-corner,

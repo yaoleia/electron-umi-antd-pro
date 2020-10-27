@@ -157,7 +157,7 @@ const ProjectWorkplace = ({ location: { query = {} }, history, currentUser }) =>
   );
 
   return (
-    <div className={styles.container}>
+    <div>
       <Card
         className={styles.projectList}
         style={{

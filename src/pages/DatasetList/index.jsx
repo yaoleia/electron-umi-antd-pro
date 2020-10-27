@@ -68,7 +68,7 @@ const handleRemove = async (selectedRows) => {
   }
 };
 
-const TableList = () => {
+const TableList = ({ history }) => {
   const [createModalVisible, handleModalVisible] = useState(false);
   const [updateModalVisible, handleUpdateModalVisible] = useState(false);
   const [stepFormValues, setStepFormValues] = useState({});
@@ -187,7 +187,18 @@ const TableList = () => {
             删除
           </a>
           <Divider type="vertical" />
-          <a>标注</a>
+          <a
+            onClick={() => {
+              history.push({
+                pathname: '/imagemapeditor',
+                query: {
+                  name: record.name,
+                },
+              });
+            }}
+          >
+            标注
+          </a>
         </>
       ),
     },
