@@ -115,6 +115,7 @@
     "not ie <= 10"
   ],
   "dependencies": {
+    "@alitajs/keep-alive": "^2.5.14",
     "@ant-design/icons": "^4.0.0",
     "@ant-design/pro-descriptions": "^1.0.16",
     "@ant-design/pro-layout": "^6.4.16",

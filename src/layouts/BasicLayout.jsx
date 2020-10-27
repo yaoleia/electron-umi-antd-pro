@@ -5,7 +5,7 @@
  */
 import ProLayout from '@ant-design/pro-layout';
 import React, { useEffect, useMemo, useRef } from 'react';
-import { Link, connect, history } from 'umi';
+import { Link, connect, history, KeepAliveLayout } from 'umi';
 import { Result, Button } from 'antd';
 import Authorized from '@/utils/Authorized';
 import RightContent from '@/components/GlobalHeader/RightContent';
@@ -115,7 +115,7 @@ const BasicLayout = (props) => {
       {...settings}
     >
       <Authorized authority={authorized.authority} noMatch={noMatch}>
-        {children}
+        <KeepAliveLayout {...props}>{children}</KeepAliveLayout>
       </Authorized>
     </ProLayout>
   );

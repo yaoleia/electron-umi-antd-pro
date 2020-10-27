@@ -120,6 +120,8 @@ export default defineConfig({
       component: './404',
     },
   ],
+  plugins: ['@alitajs/keep-alive'],
+  keepalive: ['/datasetlist'],
   // Theme for antd: https://ant.design/docs/react/customize-theme-cn
   theme: {
     // ...darkTheme,
