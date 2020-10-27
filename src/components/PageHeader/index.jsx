@@ -1,16 +1,14 @@
 import React from 'react';
 import { Card } from 'antd';
-import { Link, history } from 'umi';
+import { history } from 'umi';
 import { RollbackOutlined } from '@ant-design/icons';
 import ScreenFull from '@/components/ScreenFull';
 import styles from './style.less';
 
 export default (props) => {
-  const { children, name, backTo, defaultPath, ...otherProps } = props;
-  const goBack = () => {
-    if (history.action === 'POP') return history.push(defaultPath || '/');
-    history.goBack();
-  };
+  const { children, name, defaultPath = '/', ...otherProps } = props;
+  const { redirect } = history.location.query;
+  const goBack = () => history.push(redirect || defaultPath);
   return (
     <Card
       className={styles.cardWrap}
@@ -19,15 +17,9 @@ export default (props) => {
       }}
       title={
         <>
-          {backTo ? (
-            <Link className={styles.goBack} to={backTo}>
-              <RollbackOutlined /> 返回
-            </Link>
-          ) : (
-            <a className={styles.goBack} onClick={goBack}>
-              <RollbackOutlined /> 返回
-            </a>
-          )}
+          <a className={styles.goBack} onClick={goBack}>
+            <RollbackOutlined /> 返回
+          </a>
           <ScreenFull />
           <span className={styles.title}>{name}</span>
         </>
