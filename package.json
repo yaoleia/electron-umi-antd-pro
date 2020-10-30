@@ -1,14 +1,14 @@
 {
-  "name": "electron-umi-antd-pro",
+  "name": "manuvision-trainer",
   "version": "0.0.1",
   "author": "yaoleia <yaoleia@163.com>",
   "private": true,
-  "description": "An out-of-box UI solution for enterprise applications",
+  "description": "模型训练平台",
   "main": "./dist/main/main.js",
   "build": {
     "artifactName": "${productName}-${version}.${ext}",
-    "productName": "ManuVision",
-    "appId": "yaoleia@163.com",
+    "productName": "ManuVision-Trainer",
+    "appId": "manuvision.trainer",
     "compression": "maximum",
     "asar": true,
     "directories": {
