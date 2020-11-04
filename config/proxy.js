@@ -8,7 +8,8 @@
 export default {
   dev: {
     '/api/': {
-      target: 'https://preview.pro.ant.design',
+      // target: 'https://preview.pro.ant.design',
+      target: 'http://0.0.0.0:7300/mock/5fa22df96186c6d46ee07c7b/example',
       changeOrigin: true,
       pathRewrite: {
         '^': '',
