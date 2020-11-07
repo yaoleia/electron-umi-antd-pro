@@ -1,79 +1,12 @@
 {
-  "name": "manuvision-trainer",
+  "name": "thor-web",
   "version": "0.0.1",
   "author": "yaoleia <yaoleia@163.com>",
   "private": true,
-  "description": "模型训练平台",
-  "main": "./dist/main/main.js",
-  "build": {
-    "artifactName": "${productName}-${version}.${ext}",
-    "productName": "ManuVision-Trainer",
-    "appId": "manuvision.trainer",
-    "compression": "maximum",
-    "asar": true,
-    "directories": {
-      "output": "release/${version}"
-    },
-    "files": [
-      "dist/",
-      "node_modules/",
-      "package.json"
-    ],
-    "dmg": {
-      "contents": [
-        {
-          "x": 410,
-          "y": 150,
-          "type": "link",
-          "path": "/Applications"
-        },
-        {
-          "x": 130,
-          "y": 150,
-          "type": "file"
-        }
-      ]
-    },
-    "nsis": {
-      "oneClick": false,
-      "allowElevation": true,
-      "allowToChangeInstallationDirectory": true,
-      "installerIcon": "build/icon.ico",
-      "uninstallerIcon": "build/icon.ico",
-      "installerHeaderIcon": "build/icon.ico",
-      "createDesktopShortcut": true,
-      "createStartMenuShortcut": true
-    },
-    "mac": {
-      "icon": "build/icon.icns",
-      "target": [
-        "dmg"
-      ]
-    },
-    "win": {
-      "icon": "build/icon.ico",
-      "target": [
-        {
-          "target": "nsis",
-          "arch": [
-            "x64",
-            "ia32"
-          ]
-        }
-      ]
-    },
-    "linux": {
-      "icon": "build/icon.icns",
-      "target": [
-        "deb"
-      ]
-    }
-  },
+  "description": "工业视觉web runtime",
   "scripts": {
     "analyze": "cross-env ANALYZE=1 umi build",
-    "build": "yarn build:renderer && yarn build:main && electron-builder -mwl",
-    "build:main": "NODE_ENV=production webpack --config ./build/webpack.main.prod.config.js",
-    "build:renderer": "umi build",
+    "build": "umi build",
     "deploy": "npm run site && npm run gh-pages",
     "dev": "npm run start:dev",
     "fetch:blocks": "pro fetch-blocks && npm run prettier",
@@ -88,9 +21,7 @@
     "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
     "precommit": "lint-staged",
     "prettier": "prettier -c --write \"src/**/*\"",
-    "start": "concurrently \"yarn start:renderer\" \"yarn start:main\"",
-    "start:renderer": "umi dev",
-    "start:main": "electron-webpack dev",
+    "start": "umi dev",
     "start:dev": "cross-env REACT_APP_ENV=dev MOCK=none umi dev",
     "start:no-mock": "cross-env MOCK=none umi dev",
     "start:no-ui": "cross-env UMI_UI=none umi dev",
@@ -170,11 +101,6 @@
     "cross-env": "^7.0.0",
     "cross-port-killer": "^1.1.1",
     "detect-installer": "^1.0.1",
-    "electron": "10.1.2",
-    "electron-builder": "22.8.1",
-    "electron-debug": "3.1.0",
-    "electron-devtools-installer": "^3.1.1",
-    "electron-webpack": "2.8.2",
     "enzyme": "^3.11.0",
     "eslint": "^7.1.0",
     "express": "^4.17.1",
@@ -185,7 +111,6 @@
     "prettier": "^2.0.1",
     "pro-download": "1.0.1",
     "puppeteer-core": "^5.0.0",
-    "run-electron": "1.0.0",
     "stylelint": "^13.0.0",
     "typescript": "^3.9.7",
     "uglifyjs-webpack-plugin": "^2.2.0",
@@ -201,13 +126,5 @@
     "src/**/*.less",
     "config/**/*.js*",
     "scripts/**/*.js"
-  ],
-  "electronWebpack": {
-    "main": {
-      "sourceDirectory": "main"
-    },
-    "renderer": {
-      "sourceDirectory": null
-    }
-  }
+  ]
 }

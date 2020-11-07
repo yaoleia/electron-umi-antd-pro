@@ -13,8 +13,8 @@ export default defineConfig({
   dva: {
     hmr: true,
   },
-  outputPath: './dist/renderer',
-  publicPath: './',
+  outputPath: './dist',
+  publicPath: '/public/',
   dynamicImport: {
     loading: '@/components/PageLoading/index',
   },
@@ -133,9 +133,4 @@ export default defineConfig({
   manifest: {
     basePath: '/',
   },
-  headScripts: [
-    {
-      src: './renderer.js',
-    },
-  ],
 });
