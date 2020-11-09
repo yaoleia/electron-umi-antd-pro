@@ -1,6 +1,6 @@
 import { stringify } from 'querystring';
 import { history } from 'umi';
-import { fakeAccountLogin } from '@/services/login';
+import { fakeAccountLogin, fakeAccountLogout } from '@/services/login';
 import { setAuthority } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
 const Model = {
@@ -40,9 +40,17 @@ const Model = {
       }
     },
 
-    logout() {
+    *logout(_, { call, put }) {
       const { redirect } = getPageQuery(); // Note: There may be security issues, please note
-
+      yield call(fakeAccountLogout);
+      yield put({
+        type: 'changeLoginStatus',
+        payload: {
+          currentAuthority: [],
+          status: false,
+          type: null,
+        },
+      });
       if (window.location.pathname !== '/user/login' && !redirect) {
         history.replace({
           pathname: '/user/login',

@@ -6,6 +6,8 @@ module.exports = {
     REACT_APP_ENV: true,
   },
   rules: {
+    'comma-dangle': 0,
+    semi: 0,
     'react/self-closing-comp': 0,
     'no-loop-func': 0,
     'no-param-reassign': 0,
