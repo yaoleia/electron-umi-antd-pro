@@ -6,7 +6,7 @@
   "description": "工业视觉web runtime",
   "scripts": {
     "analyze": "cross-env ANALYZE=1 umi build",
-    "build": "umi build",
+    "build": "cross-env UMI_ENV=prod umi build",
     "deploy": "npm run site && npm run gh-pages",
     "dev": "npm run start:dev",
     "fetch:blocks": "pro fetch-blocks && npm run prettier",
