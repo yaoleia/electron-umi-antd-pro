@@ -8,6 +8,7 @@ module.exports = {
   rules: {
     'comma-dangle': 0,
     semi: 0,
+    'no-undef': 0,
     'react/self-closing-comp': 0,
     'no-loop-func': 0,
     'no-param-reassign': 0,
