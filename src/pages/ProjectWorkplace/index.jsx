@@ -9,7 +9,7 @@ import EditableLinkGroup from './components/EditableLinkGroup';
 import styles from './style.less';
 import io from 'socket.io-client';
 
-const socket = io('http://10.18.144.239:7001/');
+const socket = io(SOCKETIO);
 socket.on('connect', () => {
   console.log('connect!');
 });

@@ -133,4 +133,7 @@ export default defineConfig({
   manifest: {
     basePath: '/',
   },
+  define: {
+    SOCKETIO: 'http://localhost:7001/',
+  },
 });
