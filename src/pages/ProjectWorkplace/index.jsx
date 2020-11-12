@@ -7,6 +7,18 @@ import DashboardMonitor from '@/pages/DashboardMonitor';
 import PageHeader from '@/components/PageHeader';
 import EditableLinkGroup from './components/EditableLinkGroup';
 import styles from './style.less';
+import io from 'socket.io-client';
+
+const socket = io('http://10.18.144.239:7001/');
+socket.on('connect', () => {
+  console.log('connect!');
+});
+
+socket.on('res', (msg) => {
+  console.log(msg);
+});
+
+window.socket = socket;
 
 const { Step } = Steps;
 
