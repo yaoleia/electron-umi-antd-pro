@@ -49,9 +49,16 @@ const errorHandler = (error) => {
  */
 
 const request = extend({
+  prefix: '',
   errorHandler,
   // 默认错误处理
   timeout: 10000,
   credentials: 'include', // 默认请求是否带上cookie
+});
+
+request.use(async (ctx, next) => {
+  console.log(ctx.req);
+  await next();
+  console.log(ctx.res);
 });
 export default request;
