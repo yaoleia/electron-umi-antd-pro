@@ -23,12 +23,12 @@ const ProjectList = ({ dispatch, projectList: { list = [] }, loading, history })
       },
     });
   };
-  useEffect(() => {
-    window.addEventListener('focus', getProjectList);
-    return () => {
-      window.removeEventListener('focus', getProjectList);
-    };
-  });
+  // useEffect(() => {
+  //   window.addEventListener('focus', getProjectList);
+  //   return () => {
+  //     window.removeEventListener('focus', getProjectList);
+  //   };
+  // });
   useEffect(getProjectList, []);
   const types = {
     defect: '缺陷检测',
