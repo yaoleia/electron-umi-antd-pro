@@ -5,7 +5,7 @@ export default {
   UserName: {
     props: {
       size: 'large',
-      id: 'userName',
+      id: 'username',
       prefix: (
         <UserOutlined
           style={{

@@ -40,7 +40,7 @@ const Login = (props) => {
           )}
 
           <UserName
-            name="userName"
+            name="username"
             placeholder="用户名: admin"
             rules={[
               {
