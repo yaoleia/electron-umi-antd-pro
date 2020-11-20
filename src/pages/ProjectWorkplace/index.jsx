@@ -9,7 +9,11 @@ import EditableLinkGroup from './components/EditableLinkGroup';
 import styles from './style.less';
 import io from 'socket.io-client';
 
-const socket = io(SOCKETIO);
+const socket = io(SOCKETIO, {
+  query: {
+    rooms: 'admin',
+  },
+});
 socket.on('connect', () => {
   console.log('connect!');
 });
