@@ -5,7 +5,7 @@ export async function query() {
 }
 
 export async function putUser(params) {
-  return request('/api/users', {
+  return request(`/api/user/${params.username}`, {
     method: 'PUT',
     data: params,
   });

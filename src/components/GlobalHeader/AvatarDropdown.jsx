@@ -24,11 +24,26 @@ class AvatarDropdown extends React.Component {
     }
   };
 
+  getAvatarURL() {
+    const { currentUser } = this.props;
+
+    if (currentUser) {
+      if (currentUser.avatar) {
+        return currentUser.avatar;
+      }
+
+      const url = 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png';
+      return url;
+    }
+
+    return '';
+  }
+
   render() {
     const {
       currentUser = {
         avatar: '',
-        name: '',
+        username: '',
       },
       menu,
     } = this.props;
@@ -51,11 +66,13 @@ class AvatarDropdown extends React.Component {
         </Menu.Item>
       </Menu>
     );
-    return currentUser && currentUser.name ? (
+    return currentUser && currentUser.username ? (
       <HeaderDropdown overlay={menuHeaderDropdown}>
         <span className={`${styles.action} ${styles.account}`}>
-          <Avatar size="small" className={styles.avatar} src={currentUser.avatar} alt="avatar" />
-          <span className={`${styles.name} anticon`}>{currentUser.name}</span>
+          <Avatar size="small" className={styles.avatar} src={this.getAvatarURL()} alt="avatar" />
+          <span className={`${styles.username} anticon`}>
+            {currentUser.nickname || currentUser.username}
+          </span>
         </span>
       </HeaderDropdown>
     ) : (

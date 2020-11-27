@@ -111,7 +111,7 @@ const ProjectWorkplace = ({ location: { query = {} }, history, currentUser }) =>
     );
   };
 
-  if (!currentUser || !currentUser.userid) {
+  if (!currentUser || !currentUser.username) {
     return null;
   }
 

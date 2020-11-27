@@ -3,7 +3,6 @@ import { Button, Input, Upload, Form, message } from 'antd';
 import { connect } from 'umi';
 import React, { Component } from 'react';
 import { GridContent } from '@ant-design/pro-layout';
-import GeographicView from './components/GeographicView';
 import styles from './style.less';
 
 const AvatarView = ({ avatar }) => (
@@ -68,12 +67,28 @@ class BaseView extends Component {
                   initialValues={currentUser}
                   hideRequiredMark
                 >
+                  <Form.Item name="time" label="注册日期">
+                    <Input readOnly disabled />
+                  </Form.Item>
+                  <Form.Item name="username" label="用户名">
+                    <Input readOnly disabled />
+                  </Form.Item>
+                  <Form.Item
+                    name="nickname"
+                    label="用户昵称"
+                    rules={[
+                      {
+                        message: '请填写用户昵称',
+                      },
+                    ]}
+                  >
+                    <Input />
+                  </Form.Item>
                   <Form.Item
                     name="email"
                     label="电子邮箱"
                     rules={[
                       {
-                        required: true,
                         message: '请填写电子邮箱地址',
                       },
                     ]}
@@ -81,31 +96,26 @@ class BaseView extends Component {
                     <Input />
                   </Form.Item>
                   <Form.Item
-                    name="name"
-                    label="用户昵称"
+                    name="title"
+                    label="职位名称"
                     rules={[
                       {
-                        required: true,
-                        message: '请填写用户昵称',
+                        message: '请填写职位名称',
                       },
                     ]}
                   >
                     <Input />
                   </Form.Item>
-                  <Form.Item name="profile" label="个人简介">
-                    <Input.TextArea rows={4} />
-                  </Form.Item>
                   <Form.Item
-                    name="geographic"
-                    label="地区"
+                    name="phone"
+                    label="电话号码"
                     rules={[
                       {
-                        required: true,
-                        message: '请选择地区',
+                        message: '请填写电话号码',
                       },
                     ]}
                   >
-                    <GeographicView />
+                    <Input />
                   </Form.Item>
                   <Form.Item>
                     <Button htmlType="submit" type="primary">
