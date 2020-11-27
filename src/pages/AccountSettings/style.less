@@ -10,10 +10,8 @@
   background-color: @menu-bg;
   .right {
     flex: 1;
-    padding-top: 8px;
-    padding-right: 40px;
-    padding-bottom: 8px;
-    padding-left: 40px;
+    width: 100%;
+    padding: 7px 20px;
     .title {
       margin-bottom: 12px;
       color: @heading-color;
@@ -66,7 +64,9 @@
 @media screen and (max-width: @screen-xl) {
   .baseView {
     flex-direction: column-reverse;
-
+    .left {
+      min-width: auto;
+    }
     .right {
       display: flex;
       flex-direction: column;
