@@ -44,10 +44,18 @@ const AvatarView = ({ avatar, username, handleFinish }) => {
 
 class BaseView extends Component {
   view = undefined;
+  formRef = React.createRef();
+
+  componentDidUpdate(preProps) {
+    const { currentUser } = this.props;
+    const { currentUser: oldUser } = preProps;
+    if (oldUser.username !== currentUser.username && this.formRef) {
+      this.formRef.current.resetFields();
+    }
+  }
 
   getAvatarURL() {
     const { currentUser } = this.props;
-
     if (currentUser) {
       if (currentUser.avatar) {
         return currentUser.avatar;
@@ -71,7 +79,6 @@ class BaseView extends Component {
     });
     message.success('个人设置保存成功！');
   };
-
   render() {
     const { currentUser } = this.props;
     return (
@@ -82,6 +89,7 @@ class BaseView extends Component {
             <div className={styles.baseView} ref={this.getViewDom}>
               <div className={styles.left}>
                 <Form
+                  ref={this.formRef}
                   layout="vertical"
                   onFinish={this.handleFinish}
                   initialValues={currentUser}
