@@ -4,23 +4,43 @@ import { connect } from 'umi';
 import React, { Component } from 'react';
 import { GridContent } from '@ant-design/pro-layout';
 import styles from './style.less';
+import _ from 'lodash';
 
-const AvatarView = ({ avatar }) => (
-  <>
-    <div className={styles.avatar_title}>头像</div>
-    <div className={styles.avatar}>
-      <img src={avatar} alt="avatar" />
-    </div>
-    <Upload showUploadList={false}>
-      <div className={styles.button_view}>
-        <Button>
-          <UploadOutlined />
-          上传新头像
-        </Button>
+const AvatarView = ({ avatar, username, handleFinish }) => {
+  const props = {
+    data: {
+      quality: 50,
+      type: 'avatar',
+    },
+    name: 'file',
+    action: '/api/upload',
+    onChange(info) {
+      if (info.file.status === 'done') {
+        const newAvatar = _.get(info, 'file.response[0].url');
+        handleFinish({ avatar: newAvatar, username });
+        message.success(`${info.file.name} 头像上传成功！`);
+      } else if (info.file.status === 'error') {
+        message.error(`${info.file.name} 头像上传失败！`);
+      }
+    },
+  };
+  return (
+    <>
+      <div className={styles.avatar_title}>头像</div>
+      <div className={styles.avatar}>
+        <img src={avatar} alt="avatar" />
       </div>
-    </Upload>
-  </>
-);
+      <Upload showUploadList={false} {...props}>
+        <div className={styles.button_view}>
+          <Button>
+            <UploadOutlined />
+            上传新头像
+          </Button>
+        </div>
+      </Upload>
+    </>
+  );
+};
 
 class BaseView extends Component {
   view = undefined;
@@ -125,7 +145,11 @@ class BaseView extends Component {
                 </Form>
               </div>
               <div className={styles.right}>
-                <AvatarView avatar={this.getAvatarURL()} />
+                <AvatarView
+                  handleFinish={this.handleFinish}
+                  {...currentUser}
+                  avatar={this.getAvatarURL()}
+                />
               </div>
             </div>
           </div>
