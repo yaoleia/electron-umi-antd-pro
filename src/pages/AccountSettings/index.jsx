@@ -6,7 +6,7 @@ import { GridContent } from '@ant-design/pro-layout';
 import styles from './style.less';
 import _ from 'lodash';
 
-const AvatarView = ({ avatar, username, handleFinish }) => {
+const AvatarView = ({ avatar, handleFinish }) => {
   const props = {
     data: {
       quality: 50,
@@ -17,7 +17,7 @@ const AvatarView = ({ avatar, username, handleFinish }) => {
     onChange(info) {
       if (info.file.status === 'done') {
         const newAvatar = _.get(info, 'file.response[0].url');
-        handleFinish({ avatar: newAvatar, username });
+        handleFinish({ avatar: newAvatar });
         message.success(`${info.file.name} 头像上传成功！`);
       } else if (info.file.status === 'error') {
         message.error(`${info.file.name} 头像上传失败！`);
@@ -153,11 +153,7 @@ class BaseView extends Component {
                 </Form>
               </div>
               <div className={styles.right}>
-                <AvatarView
-                  handleFinish={this.handleFinish}
-                  {...currentUser}
-                  avatar={this.getAvatarURL()}
-                />
+                <AvatarView handleFinish={this.handleFinish} avatar={this.getAvatarURL()} />
               </div>
             </div>
           </div>
