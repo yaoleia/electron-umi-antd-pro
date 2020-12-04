@@ -16,7 +16,7 @@ const AvatarView = ({ avatar, handleFinish }) => {
     action: '/api/upload',
     onChange(info) {
       if (info.file.status === 'done') {
-        const newAvatar = _.get(info, 'file.response[0].save_path');
+        const newAvatar = _.get(info, 'file.response[0].url');
         handleFinish({ avatar: newAvatar });
         message.success(`${info.file.name} 头像上传成功！`);
       } else if (info.file.status === 'error') {
